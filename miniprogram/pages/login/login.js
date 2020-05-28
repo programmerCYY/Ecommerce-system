@@ -4,9 +4,33 @@ Page({
    * 页面的初始数据
    */
   data: {
-    
+    account:'',
+    password:'',
   },
-
+  AccountInput:function(e){
+    this.setData({ account:e.detail.value})
+  },
+  PasswordInput:function(e){
+    this.setData({password:e.detail.value})
+  },
+  onClickSubmit:function(){
+    if(this.data.account=='aaa'&&this.data.password=='sss'){
+      wx.showToast({
+      title: '登录成功',
+      icon: 'success',
+      duration: 2000//持续的时间
+      })
+      wx.navigateBack({
+        delta: 1
+      })
+    }
+    else
+      wx.showToast({
+      title: '账号或密码错误',
+      icon: 'none',
+      duration: 2000//持续的时间
+      })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
