@@ -1,0 +1,14 @@
+<button bindtap="insert">插入数据</button>
+<button bindtap='updata'>更新数据</button>
+<button bindtap="search">查找数据</button>
+<button bindtap="delete">删除数据</button>
+<button bindtap="sum">调用云函数sum</button>
+<button bindtap="openid">获取当前用户的openid</button>
+<button bindtap="batchdelete">批量删除数据</button>
+<button bindtap="upload">上传图片</button>
+<button bindtap="getfile">文件展示</button>
+<block wx:for="">
+<image src="{{item.fileid}}"></image>
+</block>
+
+

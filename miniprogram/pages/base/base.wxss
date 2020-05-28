@@ -1,0 +1,12 @@
+@import '../../style/common.wxss';
+
+.box{
+  width: 200rpx;
+  height: 200rpx;
+  background: #ccc;
+}
+.chlid{
+  width: 100rpx;
+  height: 100rpx;
+  background: #bbb;
+}

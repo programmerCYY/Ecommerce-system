@@ -1,0 +1,42 @@
+{
+   "pages": [
+    "pages/base/base",
+    "pages/cloud/cloud",
+    "pages/mine/mine"
+  ],
+  "window": {
+    "backgroundColor": "#F6F6F6",
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#F6F6F6",
+    "navigationBarTitleText":  "首页",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#ccc",
+    "selectedColor": "#f00",
+    "list": [{
+        "pagePath": "pages/base/base",
+        "text": "首页",
+        "iconPath": "images/btn-tabs_01.png",
+        "selectedIconPath": "images/btn-tabs_08.png"
+      },{
+        "pagePath": "pages/cloud/cloud",
+        "text": "购物车",
+        "iconPath": "images/btn-tabs_05.png",
+        "selectedIconPath": "images/btn-tabs_09.png"
+      }
+      ,
+      {
+        "pagePath":"pages/mine/mine",
+        "text":"个人",
+        "iconPath":"images/btn-tabs_06.png",
+        "selectedIconPath":"images/btn-tabs_10.png"
+      }
+      ]
+  },
+  "usingComponents": {
+    "i-button": "dist/button/index"
+  },
+  "sitemapLocation": "sitemap.json",
+  "style": "v2"
+}

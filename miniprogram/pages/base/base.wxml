@@ -1,0 +1,24 @@
+<view>{{msg}}</view>
+<image class='banner' src="{{img}}"></image>
+<view wx:for="{{arr}}" wx:key="index">
+{{index}} {{item}}
+</view>
+
+<view wx:for="{{list}}" wx:key="index">
+{{item.name}} {{item.age}}
+</view>
+
+<view wx:if="{{islogin}}">
+lover</view>
+<view wx:else>请登录</view>
+
+<view hidden="{{islogin}}">hidden</view>
+
+<view class='box' catchtap="ontapboxhandler">
+<view class='chlid' catchtap="ontapchildhandler"></view>
+</view>
+
+<button size='mini' bindtap='ontaphandler'>点我加一</button>
+<view>{{count}}</view>
+
+<i-button type="primary" bind:click="handleClick">这是一个按钮</i-button>
