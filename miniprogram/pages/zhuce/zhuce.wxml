@@ -1,0 +1,22 @@
+<!--pages/zhuce/zhuce.wxml-->
+<!--pages/auth/auth.wxml-->
+<view class="logo">
+  <image src='/images/pig.jpg'></image>
+  <text>欢迎注册</text>
+</view>
+
+<view class="form">
+  <view class="row-group">
+    <text>账号</text>
+    <input placeholder="请填写手机账号" placeholder-class='txt' maxlength='11' value="{{account}}" bindinput="AccountInput" />
+  </view>
+
+   <view class="row-group">
+    <text>密码</text>
+    <input placeholder="请填写密码" placeholder-class='txt' maxlength='11' value="{{password}}" bindinput="PasswordInput" />
+  </view>
+
+  <view>
+    <button class="submit"  open-type="getUserInfo" bindtap="onClickSubmit">注册</button>
+  </view>
+</view>

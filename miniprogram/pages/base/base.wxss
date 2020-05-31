@@ -1,12 +1,100 @@
-@import '../../style/common.wxss';
+@import "/wxSearch/wxSearch.wxss";
 
-.box{
+.navbar{  
+  flex: none;  
+  display: flex;  
+  background: #fff;  
+}  
+.navbar .item{  
+  position: relative;  
+  flex: auto;  
+  text-align: center;  
+  line-height: 80rpx;  
+  font-size:14px;
+}  
+/* 顶部导航字体颜色 */
+.navbar .item.active{  
+   color: #e1007e;
+}  
+/* 顶部指示条属性 */
+.navbar .item.active:after{  
+  content: "";  
+  display: block;  
+  position: absolute;  
+  bottom: 0;  
+  left: 0;  
+  right: 0;  
+  height: 5rpx;  
+  background: #e1007e;  
+  width: 70%;
+  margin: 0px auto;
+}
+
+.swiper-box{
+padding: 30rpx;
+}
+
+.swiper-box swiper{
+  height: 300rpx;
+}
+
+.swiper-box swiper image{
+width: 100%;
+height: 100%;
+}
+/*元素加了浮动后要给父元素清除*/
+.nav-box .nav{
+  width:2000rpx;
+  overflow: hidden;
+}
+
+.nav-box .nav .item{
+  width:100rpx;
+  height: 60rpx;
+  line-height:60rpx; 
+  border: solid 2rpx;
+  text-align: center;
+  font-size: 28rpx;
+  margin-left: 20rpx;
+  border-radius: 20rpx;
+  float:left;
+}
+
+.nav-box .nav .item.current{
+  color:green;
+}
+
+.good-list .item{
+  display: flex;
+  padding: 30rpx 20rpx;
+  border-bottom:solid 2rpx #999
+}
+
+.good-list .item .pic{
   width: 200rpx;
   height: 200rpx;
-  background: #ccc;
 }
-.chlid{
-  width: 100rpx;
-  height: 100rpx;
-  background: #bbb;
+
+.good-list .item .pic image{
+  width: 200rpx;
+  height: 200rpx;
+}
+
+.good-list .item .content{
+margin-left: 20rpx;
+}
+
+.good-list .item .content .title{
+  font-size: 32rpx;
+}
+
+.good-list .item .content .desc{
+  font-size: 24rpx;
+  color:#999;
+  margin-top: 10rpx;
+}
+
+.good-list .item .content .price{
+  color:red;
+  margin-top: 10rpx;
 }

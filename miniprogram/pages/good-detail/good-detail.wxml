@@ -1,0 +1,59 @@
+<!--pages/good-detail/good-detail.wxml-->
+
+<view class="page-box">
+
+  <view class="swiper-box">
+    <swiper bindchange="swiperchange" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+      <swiper-item wx:for="{{detailInfo.SwiperImgList}}" wx:key="*this">
+        <image src="{{item}}"></image>
+      </swiper-item>
+    </swiper>
+    <!--结构-->
+    <view class="tips">
+      <text>{{current+1}}/3</text>
+    </view>
+  </view>
+  <!--幻灯片-->
+
+  <view class="good-info">
+    <view class="price">$99</view>
+    <view class="choose">
+      <view class="title">商品名字</view>
+    </view>
+  </view>
+  <!--商品信息-->
+
+  <view class="address">
+    <view class="iconfont iconmap"></view>
+    <view wx:for="{{detailInfo.Address}}" wx:key="*this">{{item}}</view>
+  </view>
+  <!--商家地址-->
+
+  <view class="detail-box">
+    <image mode="widthFix" src="https://www.maohz.com/mhzapi/api/Common/ImageFile/goodsimgderek20181105023609436883.jpg"></image>
+    <image mode="widthFix" src="https://www.maohz.com/mhzapi/api/Common/ImageFile/goodsimgderek20181105023609436883.jpg"></image>
+    <image mode="widthFix" src="https://www.maohz.com/mhzapi/api/Common/ImageFile/goodsimgderek20181105023609436883.jpg"></image>
+  </view>
+  <!--商品介绍-->
+
+  <view class="bottom-nav">
+    <view class="daohan">
+      <view class="iconfont iconhome"></view>
+        <view>首页</view>
+      </view>
+
+      <view class="daohan">
+      <view class="iconfont iconxuanze"></view>
+        <view>选择</view>
+      </view>
+
+      <view class="daohan">
+      <view class="iconfont icongouwuche"></view>
+        <view>购物车</view>
+      </view>
+      
+    <view class="addcard">加入购物车</view>
+  </view>
+  <!--底部导航-->
+
+</view>

@@ -1,6 +1,3 @@
-@import '../../style/common.wxss';
-
-
 /* 顶部样式 开始 */
 .top-view{
   background-color: #01ccb6;
