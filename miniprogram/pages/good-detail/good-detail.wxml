@@ -16,9 +16,9 @@
   <!--幻灯片-->
 
   <view class="good-info">
-    <view class="price">$99</view>
+    <view class="price">${{detailInfo.SaleAmount}}</view>
     <view class="choose">
-      <view class="title">商品名字</view>
+      <view class="title">{{detailInfo.Title}}</view>
     </view>
   </view>
   <!--商品信息-->
@@ -30,29 +30,29 @@
   <!--商家地址-->
 
   <view class="detail-box">
-    <image mode="widthFix" src="https://www.maohz.com/mhzapi/api/Common/ImageFile/goodsimgderek20181105023609436883.jpg"></image>
-    <image mode="widthFix" src="https://www.maohz.com/mhzapi/api/Common/ImageFile/goodsimgderek20181105023609436883.jpg"></image>
-    <image mode="widthFix" src="https://www.maohz.com/mhzapi/api/Common/ImageFile/goodsimgderek20181105023609436883.jpg"></image>
+  <block wx:for="{{detailInfo.DetailImgList}}" wx:key="*this">
+   <image mode="widthFix" src="{{item}}"></image>
+  </block>
   </view>
   <!--商品介绍-->
 
   <view class="bottom-nav">
-    <view class="daohan">
+    <view class="daohan" bindtap="jumptohome">
       <view class="iconfont iconhome"></view>
         <view>首页</view>
       </view>
 
-      <view class="daohan">
+      <view class="daohan" bindtap="choose">
       <view class="iconfont iconxuanze"></view>
         <view>选择</view>
       </view>
 
-      <view class="daohan">
+      <view class="daohan" bindtap="jumptocart">
       <view class="iconfont icongouwuche"></view>
         <view>购物车</view>
       </view>
       
-    <view class="addcard">加入购物车</view>
+    <view class="addcard" bindtap="addtocart">加入购物车</view>
   </view>
   <!--底部导航-->
 

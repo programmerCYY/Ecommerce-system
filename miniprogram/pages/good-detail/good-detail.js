@@ -11,6 +11,7 @@ Page({
     interval: 2000,
     duration: 500,
     current:0,
+    goodsNo:"",
     detailInfo: {
       "Id": 44,
       "ShopId": 2,
@@ -47,13 +48,60 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    console.log(options)
+    
+   // console.log(options)
+    this.data.goodsNo = options.goodno;
+    this.getdata();
+  },
+  //获取数据接口
+  getdata:function(){
+    let self=this;
+    wx.request({
+      url: 'https://ys.lumingx.com/api/miniapps/getWXGoodsInfo', //仅为示例，并非真实的接口地址
+      data: {
+        goodsNo: self.data.goodsNo
+      },
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success(res) {
+        console.log(res.data)
+        let result=res.data;
+        if(result && result.data){
+          self.setData({
+            detailInfo:result.data
+          })
+        }
+      },
+    })
   },
 
-  //切换事件
+  //切换事件,设置当前切换时候的底部坐标
   swiperchange: function(e){
     let currentnum = e.detail.current;
     this.setData({ current: currentnum })
+  },
+
+  //跳转回首页
+  jumptohome:function(){
+    wx.switchTab({
+      url: '/pages/base/base',
+    })//跳转到tabbar页面并关闭其他页面
+  },
+  //出现选择界面,目前不会实现
+  choose:function(){
+    console.log("我不会")
+  },
+  //跳到购物车界面
+  jumptocart:function(){
+    wx.switchTab({
+      url: '/pages/cart/cart',
+    })
+  },
+
+  //加入购物车，目前不会
+  addtocart:function(){
+    console.log("我不会")
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
