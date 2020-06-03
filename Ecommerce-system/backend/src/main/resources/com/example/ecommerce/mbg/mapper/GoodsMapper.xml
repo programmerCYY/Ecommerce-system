@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.ecommerce.mbg.mapper.GoodsMapper">
+  <resultMap id="BaseResultMap" type="com.example.ecommerce.mbg.model.Goods">
+    <id column="goodID" jdbcType="INTEGER" property="goodid" />
+    <result column="StoreID" jdbcType="VARCHAR" property="storeid" />
+    <result column="Goodname" jdbcType="VARCHAR" property="goodname" />
+    <result column="Goodpictrue" jdbcType="VARCHAR" property="goodpictrue" />
+    <result column="CheckState" jdbcType="INTEGER" property="checkstate" />
+    <result column="number" jdbcType="INTEGER" property="number" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.example.ecommerce.mbg.model.Goods">
+    <result column="introduction" jdbcType="LONGVARCHAR" property="introduction" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    goodID, StoreID, Goodname, Goodpictrue, CheckState, number
+  </sql>
+  <sql id="Blob_Column_List">
+    introduction
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.example.ecommerce.mbg.model.GoodsExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from goods
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.example.ecommerce.mbg.model.GoodsExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from goods
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from goods
+    where goodID = #{goodid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from goods
+    where goodID = #{goodid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.example.ecommerce.mbg.model.GoodsExample">
+    delete from goods
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.example.ecommerce.mbg.model.Goods">
+    insert into goods (goodID, StoreID, Goodname, 
+      Goodpictrue, CheckState, number, 
+      introduction)
+    values (#{goodid,jdbcType=INTEGER}, #{storeid,jdbcType=VARCHAR}, #{goodname,jdbcType=VARCHAR}, 
+      #{goodpictrue,jdbcType=VARCHAR}, #{checkstate,jdbcType=INTEGER}, #{number,jdbcType=INTEGER}, 
+      #{introduction,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.ecommerce.mbg.model.Goods">
+    insert into goods
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="goodid != null">
+        goodID,
+      </if>
+      <if test="storeid != null">
+        StoreID,
+      </if>
+      <if test="goodname != null">
+        Goodname,
+      </if>
+      <if test="goodpictrue != null">
+        Goodpictrue,
+      </if>
+      <if test="checkstate != null">
+        CheckState,
+      </if>
+      <if test="number != null">
+        number,
+      </if>
+      <if test="introduction != null">
+        introduction,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="goodid != null">
+        #{goodid,jdbcType=INTEGER},
+      </if>
+      <if test="storeid != null">
+        #{storeid,jdbcType=VARCHAR},
+      </if>
+      <if test="goodname != null">
+        #{goodname,jdbcType=VARCHAR},
+      </if>
+      <if test="goodpictrue != null">
+        #{goodpictrue,jdbcType=VARCHAR},
+      </if>
+      <if test="checkstate != null">
+        #{checkstate,jdbcType=INTEGER},
+      </if>
+      <if test="number != null">
+        #{number,jdbcType=INTEGER},
+      </if>
+      <if test="introduction != null">
+        #{introduction,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.example.ecommerce.mbg.model.GoodsExample" resultType="java.lang.Long">
+    select count(*) from goods
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update goods
+    <set>
+      <if test="record.goodid != null">
+        goodID = #{record.goodid,jdbcType=INTEGER},
+      </if>
+      <if test="record.storeid != null">
+        StoreID = #{record.storeid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodname != null">
+        Goodname = #{record.goodname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodpictrue != null">
+        Goodpictrue = #{record.goodpictrue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.checkstate != null">
+        CheckState = #{record.checkstate,jdbcType=INTEGER},
+      </if>
+      <if test="record.number != null">
+        number = #{record.number,jdbcType=INTEGER},
+      </if>
+      <if test="record.introduction != null">
+        introduction = #{record.introduction,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update goods
+    set goodID = #{record.goodid,jdbcType=INTEGER},
+      StoreID = #{record.storeid,jdbcType=VARCHAR},
+      Goodname = #{record.goodname,jdbcType=VARCHAR},
+      Goodpictrue = #{record.goodpictrue,jdbcType=VARCHAR},
+      CheckState = #{record.checkstate,jdbcType=INTEGER},
+      number = #{record.number,jdbcType=INTEGER},
+      introduction = #{record.introduction,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update goods
+    set goodID = #{record.goodid,jdbcType=INTEGER},
+      StoreID = #{record.storeid,jdbcType=VARCHAR},
+      Goodname = #{record.goodname,jdbcType=VARCHAR},
+      Goodpictrue = #{record.goodpictrue,jdbcType=VARCHAR},
+      CheckState = #{record.checkstate,jdbcType=INTEGER},
+      number = #{record.number,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.ecommerce.mbg.model.Goods">
+    update goods
+    <set>
+      <if test="storeid != null">
+        StoreID = #{storeid,jdbcType=VARCHAR},
+      </if>
+      <if test="goodname != null">
+        Goodname = #{goodname,jdbcType=VARCHAR},
+      </if>
+      <if test="goodpictrue != null">
+        Goodpictrue = #{goodpictrue,jdbcType=VARCHAR},
+      </if>
+      <if test="checkstate != null">
+        CheckState = #{checkstate,jdbcType=INTEGER},
+      </if>
+      <if test="number != null">
+        number = #{number,jdbcType=INTEGER},
+      </if>
+      <if test="introduction != null">
+        introduction = #{introduction,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where goodID = #{goodid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.example.ecommerce.mbg.model.Goods">
+    update goods
+    set StoreID = #{storeid,jdbcType=VARCHAR},
+      Goodname = #{goodname,jdbcType=VARCHAR},
+      Goodpictrue = #{goodpictrue,jdbcType=VARCHAR},
+      CheckState = #{checkstate,jdbcType=INTEGER},
+      number = #{number,jdbcType=INTEGER},
+      introduction = #{introduction,jdbcType=LONGVARCHAR}
+    where goodID = #{goodid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.ecommerce.mbg.model.Goods">
+    update goods
+    set StoreID = #{storeid,jdbcType=VARCHAR},
+      Goodname = #{goodname,jdbcType=VARCHAR},
+      Goodpictrue = #{goodpictrue,jdbcType=VARCHAR},
+      CheckState = #{checkstate,jdbcType=INTEGER},
+      number = #{number,jdbcType=INTEGER}
+    where goodID = #{goodid,jdbcType=INTEGER}
+  </update>
+</mapper>

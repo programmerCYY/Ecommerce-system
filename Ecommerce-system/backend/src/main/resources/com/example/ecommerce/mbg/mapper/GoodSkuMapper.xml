@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.ecommerce.mbg.mapper.GoodSkuMapper">
+  <resultMap id="BaseResultMap" type="com.example.ecommerce.mbg.model.GoodSku">
+    <id column="SKUID" jdbcType="INTEGER" property="skuid" />
+    <result column="goodID" jdbcType="INTEGER" property="goodid" />
+    <result column="color" jdbcType="VARCHAR" property="color" />
+    <result column="size" jdbcType="VARCHAR" property="size" />
+    <result column="number" jdbcType="INTEGER" property="number" />
+    <result column="price" jdbcType="DECIMAL" property="price" />
+    <result column="pictrue" jdbcType="VARCHAR" property="pictrue" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    SKUID, goodID, color, size, number, price, pictrue
+  </sql>
+  <select id="selectByExample" parameterType="com.example.ecommerce.mbg.model.GoodSkuExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from good_sku
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from good_sku
+    where SKUID = #{skuid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from good_sku
+    where SKUID = #{skuid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.example.ecommerce.mbg.model.GoodSkuExample">
+    delete from good_sku
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.example.ecommerce.mbg.model.GoodSku">
+    insert into good_sku (SKUID, goodID, color, 
+      size, number, price, 
+      pictrue)
+    values (#{skuid,jdbcType=INTEGER}, #{goodid,jdbcType=INTEGER}, #{color,jdbcType=VARCHAR}, 
+      #{size,jdbcType=VARCHAR}, #{number,jdbcType=INTEGER}, #{price,jdbcType=DECIMAL}, 
+      #{pictrue,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.ecommerce.mbg.model.GoodSku">
+    insert into good_sku
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="skuid != null">
+        SKUID,
+      </if>
+      <if test="goodid != null">
+        goodID,
+      </if>
+      <if test="color != null">
+        color,
+      </if>
+      <if test="size != null">
+        size,
+      </if>
+      <if test="number != null">
+        number,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="pictrue != null">
+        pictrue,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="skuid != null">
+        #{skuid,jdbcType=INTEGER},
+      </if>
+      <if test="goodid != null">
+        #{goodid,jdbcType=INTEGER},
+      </if>
+      <if test="color != null">
+        #{color,jdbcType=VARCHAR},
+      </if>
+      <if test="size != null">
+        #{size,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null">
+        #{number,jdbcType=INTEGER},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="pictrue != null">
+        #{pictrue,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.example.ecommerce.mbg.model.GoodSkuExample" resultType="java.lang.Long">
+    select count(*) from good_sku
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update good_sku
+    <set>
+      <if test="record.skuid != null">
+        SKUID = #{record.skuid,jdbcType=INTEGER},
+      </if>
+      <if test="record.goodid != null">
+        goodID = #{record.goodid,jdbcType=INTEGER},
+      </if>
+      <if test="record.color != null">
+        color = #{record.color,jdbcType=VARCHAR},
+      </if>
+      <if test="record.size != null">
+        size = #{record.size,jdbcType=VARCHAR},
+      </if>
+      <if test="record.number != null">
+        number = #{record.number,jdbcType=INTEGER},
+      </if>
+      <if test="record.price != null">
+        price = #{record.price,jdbcType=DECIMAL},
+      </if>
+      <if test="record.pictrue != null">
+        pictrue = #{record.pictrue,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update good_sku
+    set SKUID = #{record.skuid,jdbcType=INTEGER},
+      goodID = #{record.goodid,jdbcType=INTEGER},
+      color = #{record.color,jdbcType=VARCHAR},
+      size = #{record.size,jdbcType=VARCHAR},
+      number = #{record.number,jdbcType=INTEGER},
+      price = #{record.price,jdbcType=DECIMAL},
+      pictrue = #{record.pictrue,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.ecommerce.mbg.model.GoodSku">
+    update good_sku
+    <set>
+      <if test="goodid != null">
+        goodID = #{goodid,jdbcType=INTEGER},
+      </if>
+      <if test="color != null">
+        color = #{color,jdbcType=VARCHAR},
+      </if>
+      <if test="size != null">
+        size = #{size,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null">
+        number = #{number,jdbcType=INTEGER},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="pictrue != null">
+        pictrue = #{pictrue,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where SKUID = #{skuid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.ecommerce.mbg.model.GoodSku">
+    update good_sku
+    set goodID = #{goodid,jdbcType=INTEGER},
+      color = #{color,jdbcType=VARCHAR},
+      size = #{size,jdbcType=VARCHAR},
+      number = #{number,jdbcType=INTEGER},
+      price = #{price,jdbcType=DECIMAL},
+      pictrue = #{pictrue,jdbcType=VARCHAR}
+    where SKUID = #{skuid,jdbcType=INTEGER}
+  </update>
+</mapper>

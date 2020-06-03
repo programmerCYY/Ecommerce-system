@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.ecommerce.mbg.mapper.UserrMapper">
+  <resultMap id="BaseResultMap" type="com.example.ecommerce.mbg.model.Userr">
+    <id column="UserID" jdbcType="VARCHAR" property="userid" />
+    <result column="Userpassword" jdbcType="VARCHAR" property="userpassword" />
+    <result column="UserAddress" jdbcType="VARCHAR" property="useraddress" />
+    <result column="UserTelephone" jdbcType="VARCHAR" property="usertelephone" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    UserID, Userpassword, UserAddress, UserTelephone
+  </sql>
+  <select id="selectByExample" parameterType="com.example.ecommerce.mbg.model.UserrExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from userr
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from userr
+    where UserID = #{userid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from userr
+    where UserID = #{userid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.example.ecommerce.mbg.model.UserrExample">
+    delete from userr
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.example.ecommerce.mbg.model.Userr">
+    insert into userr (UserID, Userpassword, UserAddress, 
+      UserTelephone)
+    values (#{userid,jdbcType=VARCHAR}, #{userpassword,jdbcType=VARCHAR}, #{useraddress,jdbcType=VARCHAR}, 
+      #{usertelephone,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.ecommerce.mbg.model.Userr">
+    insert into userr
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userid != null">
+        UserID,
+      </if>
+      <if test="userpassword != null">
+        Userpassword,
+      </if>
+      <if test="useraddress != null">
+        UserAddress,
+      </if>
+      <if test="usertelephone != null">
+        UserTelephone,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userid != null">
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="userpassword != null">
+        #{userpassword,jdbcType=VARCHAR},
+      </if>
+      <if test="useraddress != null">
+        #{useraddress,jdbcType=VARCHAR},
+      </if>
+      <if test="usertelephone != null">
+        #{usertelephone,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.example.ecommerce.mbg.model.UserrExample" resultType="java.lang.Long">
+    select count(*) from userr
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update userr
+    <set>
+      <if test="record.userid != null">
+        UserID = #{record.userid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userpassword != null">
+        Userpassword = #{record.userpassword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.useraddress != null">
+        UserAddress = #{record.useraddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.usertelephone != null">
+        UserTelephone = #{record.usertelephone,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update userr
+    set UserID = #{record.userid,jdbcType=VARCHAR},
+      Userpassword = #{record.userpassword,jdbcType=VARCHAR},
+      UserAddress = #{record.useraddress,jdbcType=VARCHAR},
+      UserTelephone = #{record.usertelephone,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.ecommerce.mbg.model.Userr">
+    update userr
+    <set>
+      <if test="userpassword != null">
+        Userpassword = #{userpassword,jdbcType=VARCHAR},
+      </if>
+      <if test="useraddress != null">
+        UserAddress = #{useraddress,jdbcType=VARCHAR},
+      </if>
+      <if test="usertelephone != null">
+        UserTelephone = #{usertelephone,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where UserID = #{userid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.ecommerce.mbg.model.Userr">
+    update userr
+    set Userpassword = #{userpassword,jdbcType=VARCHAR},
+      UserAddress = #{useraddress,jdbcType=VARCHAR},
+      UserTelephone = #{usertelephone,jdbcType=VARCHAR}
+    where UserID = #{userid,jdbcType=VARCHAR}
+  </update>
+</mapper>
