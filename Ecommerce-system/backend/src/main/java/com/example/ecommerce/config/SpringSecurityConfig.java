@@ -3,7 +3,10 @@ package com.example.ecommerce.config;
 import com.example.ecommerce.component.JwtAuthenticationTokenFilter;
 import com.example.ecommerce.component.RestAuthenticationEntryPoint;
 import com.example.ecommerce.component.RestfulAccessDeniedHandler;
+import com.example.ecommerce.dto.AdminUserDetails;
 import com.example.ecommerce.mbg.model.Manager;
+import com.example.ecommerce.mbg.model.Userpermission;
+import com.example.ecommerce.service.ManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,10 +18,14 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+import java.util.List;
 
 /**
  * @author: rain
@@ -34,6 +41,10 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private RestAuthenticationEntryPoint restAuthenticationEntryPoint;
+
+    @Autowired(required = false)
+    private ManagerService managerService;
+
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
@@ -88,4 +99,11 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         return new JwtAuthenticationTokenFilter();
     }
 
+
+    @Override
+    @Bean
+    public UserDetailsService userDetailsService(){
+        //获取登录用户信息
+        return username->managerService.loadUserByUsername(username);
+    }
 }

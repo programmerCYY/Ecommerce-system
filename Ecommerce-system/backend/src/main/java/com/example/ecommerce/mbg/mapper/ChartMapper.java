@@ -10,7 +10,7 @@ public interface ChartMapper {
 
     int deleteByExample(ChartExample example);
 
-    int deleteByPrimaryKey(Integer chartid);
+    int deleteByPrimaryKey(String chartid);
 
     int insert(Chart record);
 
@@ -18,7 +18,7 @@ public interface ChartMapper {
 
     List<Chart> selectByExample(ChartExample example);
 
-    Chart selectByPrimaryKey(Integer chartid);
+    Chart selectByPrimaryKey(String chartid);
 
     int updateByExampleSelective(@Param("record") Chart record, @Param("example") ChartExample example);
 

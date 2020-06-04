@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.ecommerce.mbg.mapper.OrderMapper">
   <resultMap id="BaseResultMap" type="com.example.ecommerce.mbg.model.Order">
-    <id column="OrderID" jdbcType="INTEGER" property="orderid" />
+    <id column="OrderID" jdbcType="VARCHAR" property="orderid" />
     <result column="UserID" jdbcType="VARCHAR" property="userid" />
     <result column="State" jdbcType="INTEGER" property="state" />
     <result column="PayTime" jdbcType="TIMESTAMP" property="paytime" />
@@ -106,17 +106,17 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
     select 
     <include refid="Base_Column_List" />
     ,
     <include refid="Blob_Column_List" />
     from order
-    where OrderID = #{orderid,jdbcType=INTEGER}
+    where OrderID = #{orderid,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from order
-    where OrderID = #{orderid,jdbcType=INTEGER}
+    where OrderID = #{orderid,jdbcType=VARCHAR}
   </delete>
   <delete id="deleteByExample" parameterType="com.example.ecommerce.mbg.model.OrderExample">
     delete from order
@@ -128,7 +128,7 @@
     insert into order (OrderID, UserID, State, 
       PayTime, GetTIme, CommentTime, 
       Comment)
-    values (#{orderid,jdbcType=INTEGER}, #{userid,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER}, 
+    values (#{orderid,jdbcType=VARCHAR}, #{userid,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER}, 
       #{paytime,jdbcType=TIMESTAMP}, #{gettime,jdbcType=TIMESTAMP}, #{commenttime,jdbcType=TIMESTAMP}, 
       #{comment,jdbcType=LONGVARCHAR})
   </insert>
@@ -159,7 +159,7 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="orderid != null">
-        #{orderid,jdbcType=INTEGER},
+        #{orderid,jdbcType=VARCHAR},
       </if>
       <if test="userid != null">
         #{userid,jdbcType=VARCHAR},
@@ -191,7 +191,7 @@
     update order
     <set>
       <if test="record.orderid != null">
-        OrderID = #{record.orderid,jdbcType=INTEGER},
+        OrderID = #{record.orderid,jdbcType=VARCHAR},
       </if>
       <if test="record.userid != null">
         UserID = #{record.userid,jdbcType=VARCHAR},
@@ -218,7 +218,7 @@
   </update>
   <update id="updateByExampleWithBLOBs" parameterType="map">
     update order
-    set OrderID = #{record.orderid,jdbcType=INTEGER},
+    set OrderID = #{record.orderid,jdbcType=VARCHAR},
       UserID = #{record.userid,jdbcType=VARCHAR},
       State = #{record.state,jdbcType=INTEGER},
       PayTime = #{record.paytime,jdbcType=TIMESTAMP},
@@ -231,7 +231,7 @@
   </update>
   <update id="updateByExample" parameterType="map">
     update order
-    set OrderID = #{record.orderid,jdbcType=INTEGER},
+    set OrderID = #{record.orderid,jdbcType=VARCHAR},
       UserID = #{record.userid,jdbcType=VARCHAR},
       State = #{record.state,jdbcType=INTEGER},
       PayTime = #{record.paytime,jdbcType=TIMESTAMP},
@@ -263,7 +263,7 @@
         Comment = #{comment,jdbcType=LONGVARCHAR},
       </if>
     </set>
-    where OrderID = #{orderid,jdbcType=INTEGER}
+    where OrderID = #{orderid,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.example.ecommerce.mbg.model.Order">
     update order
@@ -273,7 +273,7 @@
       GetTIme = #{gettime,jdbcType=TIMESTAMP},
       CommentTime = #{commenttime,jdbcType=TIMESTAMP},
       Comment = #{comment,jdbcType=LONGVARCHAR}
-    where OrderID = #{orderid,jdbcType=INTEGER}
+    where OrderID = #{orderid,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.example.ecommerce.mbg.model.Order">
     update order
@@ -282,6 +282,6 @@
       PayTime = #{paytime,jdbcType=TIMESTAMP},
       GetTIme = #{gettime,jdbcType=TIMESTAMP},
       CommentTime = #{commenttime,jdbcType=TIMESTAMP}
-    where OrderID = #{orderid,jdbcType=INTEGER}
+    where OrderID = #{orderid,jdbcType=VARCHAR}
   </update>
 </mapper>

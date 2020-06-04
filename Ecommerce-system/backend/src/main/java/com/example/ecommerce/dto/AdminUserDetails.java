@@ -23,6 +23,7 @@ public class AdminUserDetails implements UserDetails {
 
     private List<Userpermission> userpermissionList;
 
+
     public AdminUserDetails(Manager manager,List<Userpermission> userpermissionList)
     {
         this.manager=manager;

@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.ecommerce.mbg.mapper.ManagerMapper">
   <resultMap id="BaseResultMap" type="com.example.ecommerce.mbg.model.Manager">
+    <id column="ID" jdbcType="INTEGER" property="id" />
     <id column="adminID" jdbcType="VARCHAR" property="adminid" />
     <result column="adminWord" jdbcType="VARCHAR" property="adminword" />
   </resultMap>
@@ -64,7 +65,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    adminID, adminWord
+    ID, adminID, adminWord
   </sql>
   <select id="selectByExample" parameterType="com.example.ecommerce.mbg.model.ManagerExample" resultMap="BaseResultMap">
     select
@@ -80,15 +81,17 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from manager
-    where adminID = #{adminid,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+      and adminID = #{adminid,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+  <delete id="deleteByPrimaryKey" parameterType="map">
     delete from manager
-    where adminID = #{adminid,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+      and adminID = #{adminid,jdbcType=VARCHAR}
   </delete>
   <delete id="deleteByExample" parameterType="com.example.ecommerce.mbg.model.ManagerExample">
     delete from manager
@@ -97,10 +100,16 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.example.ecommerce.mbg.model.Manager">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
     insert into manager (adminID, adminWord)
     values (#{adminid,jdbcType=VARCHAR}, #{adminword,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.example.ecommerce.mbg.model.Manager">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
     insert into manager
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="adminid != null">
@@ -128,6 +137,9 @@
   <update id="updateByExampleSelective" parameterType="map">
     update manager
     <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
       <if test="record.adminid != null">
         adminID = #{record.adminid,jdbcType=VARCHAR},
       </if>
@@ -141,7 +153,8 @@
   </update>
   <update id="updateByExample" parameterType="map">
     update manager
-    set adminID = #{record.adminid,jdbcType=VARCHAR},
+    set ID = #{record.id,jdbcType=INTEGER},
+      adminID = #{record.adminid,jdbcType=VARCHAR},
       adminWord = #{record.adminword,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -154,11 +167,13 @@
         adminWord = #{adminword,jdbcType=VARCHAR},
       </if>
     </set>
-    where adminID = #{adminid,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+      and adminID = #{adminid,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.example.ecommerce.mbg.model.Manager">
     update manager
     set adminWord = #{adminword,jdbcType=VARCHAR}
-    where adminID = #{adminid,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+      and adminID = #{adminid,jdbcType=VARCHAR}
   </update>
 </mapper>

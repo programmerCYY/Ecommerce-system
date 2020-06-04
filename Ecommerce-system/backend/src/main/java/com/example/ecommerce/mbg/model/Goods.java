@@ -4,7 +4,7 @@ import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
 
 public class Goods implements Serializable {
-    private Integer goodid;
+    private String goodid;
 
     private String storeid;
 
@@ -21,11 +21,11 @@ public class Goods implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    public Integer getGoodid() {
+    public String getGoodid() {
         return goodid;
     }
 
-    public void setGoodid(Integer goodid) {
+    public void setGoodid(String goodid) {
         this.goodid = goodid;
     }
 

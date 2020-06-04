@@ -3,7 +3,7 @@
 <mapper namespace="com.example.ecommerce.mbg.mapper.GoodSkuMapper">
   <resultMap id="BaseResultMap" type="com.example.ecommerce.mbg.model.GoodSku">
     <id column="SKUID" jdbcType="INTEGER" property="skuid" />
-    <result column="goodID" jdbcType="INTEGER" property="goodid" />
+    <result column="goodID" jdbcType="VARCHAR" property="goodid" />
     <result column="color" jdbcType="VARCHAR" property="color" />
     <result column="size" jdbcType="VARCHAR" property="size" />
     <result column="number" jdbcType="INTEGER" property="number" />
@@ -105,7 +105,7 @@
     insert into good_sku (SKUID, goodID, color, 
       size, number, price, 
       pictrue)
-    values (#{skuid,jdbcType=INTEGER}, #{goodid,jdbcType=INTEGER}, #{color,jdbcType=VARCHAR}, 
+    values (#{skuid,jdbcType=INTEGER}, #{goodid,jdbcType=VARCHAR}, #{color,jdbcType=VARCHAR}, 
       #{size,jdbcType=VARCHAR}, #{number,jdbcType=INTEGER}, #{price,jdbcType=DECIMAL}, 
       #{pictrue,jdbcType=VARCHAR})
   </insert>
@@ -139,7 +139,7 @@
         #{skuid,jdbcType=INTEGER},
       </if>
       <if test="goodid != null">
-        #{goodid,jdbcType=INTEGER},
+        #{goodid,jdbcType=VARCHAR},
       </if>
       <if test="color != null">
         #{color,jdbcType=VARCHAR},
@@ -171,7 +171,7 @@
         SKUID = #{record.skuid,jdbcType=INTEGER},
       </if>
       <if test="record.goodid != null">
-        goodID = #{record.goodid,jdbcType=INTEGER},
+        goodID = #{record.goodid,jdbcType=VARCHAR},
       </if>
       <if test="record.color != null">
         color = #{record.color,jdbcType=VARCHAR},
@@ -196,7 +196,7 @@
   <update id="updateByExample" parameterType="map">
     update good_sku
     set SKUID = #{record.skuid,jdbcType=INTEGER},
-      goodID = #{record.goodid,jdbcType=INTEGER},
+      goodID = #{record.goodid,jdbcType=VARCHAR},
       color = #{record.color,jdbcType=VARCHAR},
       size = #{record.size,jdbcType=VARCHAR},
       number = #{record.number,jdbcType=INTEGER},
@@ -210,7 +210,7 @@
     update good_sku
     <set>
       <if test="goodid != null">
-        goodID = #{goodid,jdbcType=INTEGER},
+        goodID = #{goodid,jdbcType=VARCHAR},
       </if>
       <if test="color != null">
         color = #{color,jdbcType=VARCHAR},
@@ -232,7 +232,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.example.ecommerce.mbg.model.GoodSku">
     update good_sku
-    set goodID = #{goodid,jdbcType=INTEGER},
+    set goodID = #{goodid,jdbcType=VARCHAR},
       color = #{color,jdbcType=VARCHAR},
       size = #{size,jdbcType=VARCHAR},
       number = #{number,jdbcType=INTEGER},

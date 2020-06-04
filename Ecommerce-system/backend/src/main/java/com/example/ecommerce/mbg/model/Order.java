@@ -5,7 +5,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class Order implements Serializable {
-    private Integer orderid;
+    private String orderid;
 
     private String userid;
 
@@ -22,11 +22,11 @@ public class Order implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    public Integer getOrderid() {
+    public String getOrderid() {
         return orderid;
     }
 
-    public void setOrderid(Integer orderid) {
+    public void setOrderid(String orderid) {
         this.orderid = orderid;
     }
 

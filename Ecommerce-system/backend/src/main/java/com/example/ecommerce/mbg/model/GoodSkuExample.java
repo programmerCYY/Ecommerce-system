@@ -175,52 +175,62 @@ public class GoodSkuExample {
             return (Criteria) this;
         }
 
-        public Criteria andGoodidEqualTo(Integer value) {
+        public Criteria andGoodidEqualTo(String value) {
             addCriterion("goodID =", value, "goodid");
             return (Criteria) this;
         }
 
-        public Criteria andGoodidNotEqualTo(Integer value) {
+        public Criteria andGoodidNotEqualTo(String value) {
             addCriterion("goodID <>", value, "goodid");
             return (Criteria) this;
         }
 
-        public Criteria andGoodidGreaterThan(Integer value) {
+        public Criteria andGoodidGreaterThan(String value) {
             addCriterion("goodID >", value, "goodid");
             return (Criteria) this;
         }
 
-        public Criteria andGoodidGreaterThanOrEqualTo(Integer value) {
+        public Criteria andGoodidGreaterThanOrEqualTo(String value) {
             addCriterion("goodID >=", value, "goodid");
             return (Criteria) this;
         }
 
-        public Criteria andGoodidLessThan(Integer value) {
+        public Criteria andGoodidLessThan(String value) {
             addCriterion("goodID <", value, "goodid");
             return (Criteria) this;
         }
 
-        public Criteria andGoodidLessThanOrEqualTo(Integer value) {
+        public Criteria andGoodidLessThanOrEqualTo(String value) {
             addCriterion("goodID <=", value, "goodid");
             return (Criteria) this;
         }
 
-        public Criteria andGoodidIn(List<Integer> values) {
+        public Criteria andGoodidLike(String value) {
+            addCriterion("goodID like", value, "goodid");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodidNotLike(String value) {
+            addCriterion("goodID not like", value, "goodid");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodidIn(List<String> values) {
             addCriterion("goodID in", values, "goodid");
             return (Criteria) this;
         }
 
-        public Criteria andGoodidNotIn(List<Integer> values) {
+        public Criteria andGoodidNotIn(List<String> values) {
             addCriterion("goodID not in", values, "goodid");
             return (Criteria) this;
         }
 
-        public Criteria andGoodidBetween(Integer value1, Integer value2) {
+        public Criteria andGoodidBetween(String value1, String value2) {
             addCriterion("goodID between", value1, value2, "goodid");
             return (Criteria) this;
         }
 
-        public Criteria andGoodidNotBetween(Integer value1, Integer value2) {
+        public Criteria andGoodidNotBetween(String value1, String value2) {
             addCriterion("goodID not between", value1, value2, "goodid");
             return (Criteria) this;
         }

@@ -22,8 +22,8 @@ public class UserrController {
     private UserrService userrService;
 
 
-    @ApiOperation("普通用户的注册，暂时使用")
-    @RequestMapping(value = "/register",method = RequestMethod.GET)
+    @ApiOperation("普通用户的注册")
+    @RequestMapping(value = "/Userrregister",method = RequestMethod.GET)
     @ResponseBody
     public CommonResult register(@RequestParam String username,
                                  @RequestParam String password,
@@ -32,11 +32,11 @@ public class UserrController {
         return userrService.register(username, password, telephone);
     }
 
-    @ApiOperation("普通用户登录，暂时使用")
-    @RequestMapping(value = "/login",method = RequestMethod.GET)
+    @ApiOperation("普通用户登录")
+    @RequestMapping(value = "/Userrlogin",method = RequestMethod.GET)
     @ResponseBody
-    public CommonResult login(@RequestParam String username,
-                                 @RequestParam String password)
+    public String login(@RequestParam String username,
+                              @RequestParam String password)
     {
         return userrService.login(username, password);
     }

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.ecommerce.mbg.mapper.ChartMapper">
   <resultMap id="BaseResultMap" type="com.example.ecommerce.mbg.model.Chart">
-    <id column="chartID" jdbcType="INTEGER" property="chartid" />
+    <id column="chartID" jdbcType="VARCHAR" property="chartid" />
     <result column="userID" jdbcType="VARCHAR" property="userid" />
     <result column="GoodID" jdbcType="VARCHAR" property="goodid" />
     <result column="number" jdbcType="INTEGER" property="number" />
@@ -83,15 +83,15 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from chart
-    where chartID = #{chartid,jdbcType=INTEGER}
+    where chartID = #{chartid,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from chart
-    where chartID = #{chartid,jdbcType=INTEGER}
+    where chartID = #{chartid,jdbcType=VARCHAR}
   </delete>
   <delete id="deleteByExample" parameterType="com.example.ecommerce.mbg.model.ChartExample">
     delete from chart
@@ -102,7 +102,7 @@
   <insert id="insert" parameterType="com.example.ecommerce.mbg.model.Chart">
     insert into chart (chartID, userID, GoodID, 
       number, price)
-    values (#{chartid,jdbcType=INTEGER}, #{userid,jdbcType=VARCHAR}, #{goodid,jdbcType=VARCHAR}, 
+    values (#{chartid,jdbcType=VARCHAR}, #{userid,jdbcType=VARCHAR}, #{goodid,jdbcType=VARCHAR}, 
       #{number,jdbcType=INTEGER}, #{price,jdbcType=DECIMAL})
   </insert>
   <insert id="insertSelective" parameterType="com.example.ecommerce.mbg.model.Chart">
@@ -126,7 +126,7 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="chartid != null">
-        #{chartid,jdbcType=INTEGER},
+        #{chartid,jdbcType=VARCHAR},
       </if>
       <if test="userid != null">
         #{userid,jdbcType=VARCHAR},
@@ -152,7 +152,7 @@
     update chart
     <set>
       <if test="record.chartid != null">
-        chartID = #{record.chartid,jdbcType=INTEGER},
+        chartID = #{record.chartid,jdbcType=VARCHAR},
       </if>
       <if test="record.userid != null">
         userID = #{record.userid,jdbcType=VARCHAR},
@@ -173,7 +173,7 @@
   </update>
   <update id="updateByExample" parameterType="map">
     update chart
-    set chartID = #{record.chartid,jdbcType=INTEGER},
+    set chartID = #{record.chartid,jdbcType=VARCHAR},
       userID = #{record.userid,jdbcType=VARCHAR},
       GoodID = #{record.goodid,jdbcType=VARCHAR},
       number = #{record.number,jdbcType=INTEGER},
@@ -198,7 +198,7 @@
         price = #{price,jdbcType=DECIMAL},
       </if>
     </set>
-    where chartID = #{chartid,jdbcType=INTEGER}
+    where chartID = #{chartid,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.example.ecommerce.mbg.model.Chart">
     update chart
@@ -206,6 +206,6 @@
       GoodID = #{goodid,jdbcType=VARCHAR},
       number = #{number,jdbcType=INTEGER},
       price = #{price,jdbcType=DECIMAL}
-    where chartID = #{chartid,jdbcType=INTEGER}
+    where chartID = #{chartid,jdbcType=VARCHAR}
   </update>
 </mapper>

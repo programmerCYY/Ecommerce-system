@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.ecommerce.mbg.mapper.GoodsMapper">
   <resultMap id="BaseResultMap" type="com.example.ecommerce.mbg.model.Goods">
-    <id column="goodID" jdbcType="INTEGER" property="goodid" />
+    <id column="goodID" jdbcType="VARCHAR" property="goodid" />
     <result column="StoreID" jdbcType="VARCHAR" property="storeid" />
     <result column="Goodname" jdbcType="VARCHAR" property="goodname" />
     <result column="Goodpictrue" jdbcType="VARCHAR" property="goodpictrue" />
@@ -106,17 +106,17 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
     select 
     <include refid="Base_Column_List" />
     ,
     <include refid="Blob_Column_List" />
     from goods
-    where goodID = #{goodid,jdbcType=INTEGER}
+    where goodID = #{goodid,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from goods
-    where goodID = #{goodid,jdbcType=INTEGER}
+    where goodID = #{goodid,jdbcType=VARCHAR}
   </delete>
   <delete id="deleteByExample" parameterType="com.example.ecommerce.mbg.model.GoodsExample">
     delete from goods
@@ -128,7 +128,7 @@
     insert into goods (goodID, StoreID, Goodname, 
       Goodpictrue, CheckState, number, 
       introduction)
-    values (#{goodid,jdbcType=INTEGER}, #{storeid,jdbcType=VARCHAR}, #{goodname,jdbcType=VARCHAR}, 
+    values (#{goodid,jdbcType=VARCHAR}, #{storeid,jdbcType=VARCHAR}, #{goodname,jdbcType=VARCHAR}, 
       #{goodpictrue,jdbcType=VARCHAR}, #{checkstate,jdbcType=INTEGER}, #{number,jdbcType=INTEGER}, 
       #{introduction,jdbcType=LONGVARCHAR})
   </insert>
@@ -159,7 +159,7 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="goodid != null">
-        #{goodid,jdbcType=INTEGER},
+        #{goodid,jdbcType=VARCHAR},
       </if>
       <if test="storeid != null">
         #{storeid,jdbcType=VARCHAR},
@@ -191,7 +191,7 @@
     update goods
     <set>
       <if test="record.goodid != null">
-        goodID = #{record.goodid,jdbcType=INTEGER},
+        goodID = #{record.goodid,jdbcType=VARCHAR},
       </if>
       <if test="record.storeid != null">
         StoreID = #{record.storeid,jdbcType=VARCHAR},
@@ -218,7 +218,7 @@
   </update>
   <update id="updateByExampleWithBLOBs" parameterType="map">
     update goods
-    set goodID = #{record.goodid,jdbcType=INTEGER},
+    set goodID = #{record.goodid,jdbcType=VARCHAR},
       StoreID = #{record.storeid,jdbcType=VARCHAR},
       Goodname = #{record.goodname,jdbcType=VARCHAR},
       Goodpictrue = #{record.goodpictrue,jdbcType=VARCHAR},
@@ -231,7 +231,7 @@
   </update>
   <update id="updateByExample" parameterType="map">
     update goods
-    set goodID = #{record.goodid,jdbcType=INTEGER},
+    set goodID = #{record.goodid,jdbcType=VARCHAR},
       StoreID = #{record.storeid,jdbcType=VARCHAR},
       Goodname = #{record.goodname,jdbcType=VARCHAR},
       Goodpictrue = #{record.goodpictrue,jdbcType=VARCHAR},
@@ -263,7 +263,7 @@
         introduction = #{introduction,jdbcType=LONGVARCHAR},
       </if>
     </set>
-    where goodID = #{goodid,jdbcType=INTEGER}
+    where goodID = #{goodid,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.example.ecommerce.mbg.model.Goods">
     update goods
@@ -273,7 +273,7 @@
       CheckState = #{checkstate,jdbcType=INTEGER},
       number = #{number,jdbcType=INTEGER},
       introduction = #{introduction,jdbcType=LONGVARCHAR}
-    where goodID = #{goodid,jdbcType=INTEGER}
+    where goodID = #{goodid,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.example.ecommerce.mbg.model.Goods">
     update goods
@@ -282,6 +282,6 @@
       Goodpictrue = #{goodpictrue,jdbcType=VARCHAR},
       CheckState = #{checkstate,jdbcType=INTEGER},
       number = #{number,jdbcType=INTEGER}
-    where goodID = #{goodid,jdbcType=INTEGER}
+    where goodID = #{goodid,jdbcType=VARCHAR}
   </update>
 </mapper>

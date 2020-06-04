@@ -8,7 +8,7 @@ public class GoodSku implements Serializable {
     @ApiModelProperty(value = "自增ID")
     private Integer skuid;
 
-    private Integer goodid;
+    private String goodid;
 
     private String color;
 
@@ -30,11 +30,11 @@ public class GoodSku implements Serializable {
         this.skuid = skuid;
     }
 
-    public Integer getGoodid() {
+    public String getGoodid() {
         return goodid;
     }
 
-    public void setGoodid(Integer goodid) {
+    public void setGoodid(String goodid) {
         this.goodid = goodid;
     }
 

@@ -115,52 +115,62 @@ public class ChartExample {
             return (Criteria) this;
         }
 
-        public Criteria andChartidEqualTo(Integer value) {
+        public Criteria andChartidEqualTo(String value) {
             addCriterion("chartID =", value, "chartid");
             return (Criteria) this;
         }
 
-        public Criteria andChartidNotEqualTo(Integer value) {
+        public Criteria andChartidNotEqualTo(String value) {
             addCriterion("chartID <>", value, "chartid");
             return (Criteria) this;
         }
 
-        public Criteria andChartidGreaterThan(Integer value) {
+        public Criteria andChartidGreaterThan(String value) {
             addCriterion("chartID >", value, "chartid");
             return (Criteria) this;
         }
 
-        public Criteria andChartidGreaterThanOrEqualTo(Integer value) {
+        public Criteria andChartidGreaterThanOrEqualTo(String value) {
             addCriterion("chartID >=", value, "chartid");
             return (Criteria) this;
         }
 
-        public Criteria andChartidLessThan(Integer value) {
+        public Criteria andChartidLessThan(String value) {
             addCriterion("chartID <", value, "chartid");
             return (Criteria) this;
         }
 
-        public Criteria andChartidLessThanOrEqualTo(Integer value) {
+        public Criteria andChartidLessThanOrEqualTo(String value) {
             addCriterion("chartID <=", value, "chartid");
             return (Criteria) this;
         }
 
-        public Criteria andChartidIn(List<Integer> values) {
+        public Criteria andChartidLike(String value) {
+            addCriterion("chartID like", value, "chartid");
+            return (Criteria) this;
+        }
+
+        public Criteria andChartidNotLike(String value) {
+            addCriterion("chartID not like", value, "chartid");
+            return (Criteria) this;
+        }
+
+        public Criteria andChartidIn(List<String> values) {
             addCriterion("chartID in", values, "chartid");
             return (Criteria) this;
         }
 
-        public Criteria andChartidNotIn(List<Integer> values) {
+        public Criteria andChartidNotIn(List<String> values) {
             addCriterion("chartID not in", values, "chartid");
             return (Criteria) this;
         }
 
-        public Criteria andChartidBetween(Integer value1, Integer value2) {
+        public Criteria andChartidBetween(String value1, String value2) {
             addCriterion("chartID between", value1, value2, "chartid");
             return (Criteria) this;
         }
 
-        public Criteria andChartidNotBetween(Integer value1, Integer value2) {
+        public Criteria andChartidNotBetween(String value1, String value2) {
             addCriterion("chartID not between", value1, value2, "chartid");
             return (Criteria) this;
         }

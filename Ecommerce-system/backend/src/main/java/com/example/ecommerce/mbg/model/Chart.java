@@ -5,7 +5,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 
 public class Chart implements Serializable {
-    private Integer chartid;
+    private String chartid;
 
     @ApiModelProperty(value = "用户ID")
     private String userid;
@@ -21,11 +21,11 @@ public class Chart implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    public Integer getChartid() {
+    public String getChartid() {
         return chartid;
     }
 
-    public void setChartid(Integer chartid) {
+    public void setChartid(String chartid) {
         this.chartid = chartid;
     }
 
