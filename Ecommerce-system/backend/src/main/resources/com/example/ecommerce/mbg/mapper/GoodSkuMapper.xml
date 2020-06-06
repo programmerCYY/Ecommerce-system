@@ -4,10 +4,11 @@
   <resultMap id="BaseResultMap" type="com.example.ecommerce.mbg.model.GoodSku">
     <id column="SKUID" jdbcType="INTEGER" property="skuid" />
     <result column="goodID" jdbcType="VARCHAR" property="goodid" />
-    <result column="color" jdbcType="VARCHAR" property="color" />
-    <result column="size" jdbcType="VARCHAR" property="size" />
     <result column="number" jdbcType="INTEGER" property="number" />
     <result column="price" jdbcType="DECIMAL" property="price" />
+    <result column="Vipprice" jdbcType="DECIMAL" property="vipprice" />
+    <result column="Left_number" jdbcType="INTEGER" property="leftNumber" />
+    <result column="Sold_number" jdbcType="INTEGER" property="soldNumber" />
     <result column="pictrue" jdbcType="VARCHAR" property="pictrue" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -69,7 +70,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    SKUID, goodID, color, size, number, price, pictrue
+    SKUID, goodID, number, price, Vipprice, Left_number, Sold_number, pictrue
   </sql>
   <select id="selectByExample" parameterType="com.example.ecommerce.mbg.model.GoodSkuExample" resultMap="BaseResultMap">
     select
@@ -102,12 +103,12 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.example.ecommerce.mbg.model.GoodSku">
-    insert into good_sku (SKUID, goodID, color, 
-      size, number, price, 
-      pictrue)
-    values (#{skuid,jdbcType=INTEGER}, #{goodid,jdbcType=VARCHAR}, #{color,jdbcType=VARCHAR}, 
-      #{size,jdbcType=VARCHAR}, #{number,jdbcType=INTEGER}, #{price,jdbcType=DECIMAL}, 
-      #{pictrue,jdbcType=VARCHAR})
+    insert into good_sku (SKUID, goodID, number, 
+      price, Vipprice, Left_number, 
+      Sold_number, pictrue)
+    values (#{skuid,jdbcType=INTEGER}, #{goodid,jdbcType=VARCHAR}, #{number,jdbcType=INTEGER}, 
+      #{price,jdbcType=DECIMAL}, #{vipprice,jdbcType=DECIMAL}, #{leftNumber,jdbcType=INTEGER}, 
+      #{soldNumber,jdbcType=INTEGER}, #{pictrue,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.example.ecommerce.mbg.model.GoodSku">
     insert into good_sku
@@ -118,17 +119,20 @@
       <if test="goodid != null">
         goodID,
       </if>
-      <if test="color != null">
-        color,
-      </if>
-      <if test="size != null">
-        size,
-      </if>
       <if test="number != null">
         number,
       </if>
       <if test="price != null">
         price,
+      </if>
+      <if test="vipprice != null">
+        Vipprice,
+      </if>
+      <if test="leftNumber != null">
+        Left_number,
+      </if>
+      <if test="soldNumber != null">
+        Sold_number,
       </if>
       <if test="pictrue != null">
         pictrue,
@@ -141,17 +145,20 @@
       <if test="goodid != null">
         #{goodid,jdbcType=VARCHAR},
       </if>
-      <if test="color != null">
-        #{color,jdbcType=VARCHAR},
-      </if>
-      <if test="size != null">
-        #{size,jdbcType=VARCHAR},
-      </if>
       <if test="number != null">
         #{number,jdbcType=INTEGER},
       </if>
       <if test="price != null">
         #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="vipprice != null">
+        #{vipprice,jdbcType=DECIMAL},
+      </if>
+      <if test="leftNumber != null">
+        #{leftNumber,jdbcType=INTEGER},
+      </if>
+      <if test="soldNumber != null">
+        #{soldNumber,jdbcType=INTEGER},
       </if>
       <if test="pictrue != null">
         #{pictrue,jdbcType=VARCHAR},
@@ -173,17 +180,20 @@
       <if test="record.goodid != null">
         goodID = #{record.goodid,jdbcType=VARCHAR},
       </if>
-      <if test="record.color != null">
-        color = #{record.color,jdbcType=VARCHAR},
-      </if>
-      <if test="record.size != null">
-        size = #{record.size,jdbcType=VARCHAR},
-      </if>
       <if test="record.number != null">
         number = #{record.number,jdbcType=INTEGER},
       </if>
       <if test="record.price != null">
         price = #{record.price,jdbcType=DECIMAL},
+      </if>
+      <if test="record.vipprice != null">
+        Vipprice = #{record.vipprice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.leftNumber != null">
+        Left_number = #{record.leftNumber,jdbcType=INTEGER},
+      </if>
+      <if test="record.soldNumber != null">
+        Sold_number = #{record.soldNumber,jdbcType=INTEGER},
       </if>
       <if test="record.pictrue != null">
         pictrue = #{record.pictrue,jdbcType=VARCHAR},
@@ -197,10 +207,11 @@
     update good_sku
     set SKUID = #{record.skuid,jdbcType=INTEGER},
       goodID = #{record.goodid,jdbcType=VARCHAR},
-      color = #{record.color,jdbcType=VARCHAR},
-      size = #{record.size,jdbcType=VARCHAR},
       number = #{record.number,jdbcType=INTEGER},
       price = #{record.price,jdbcType=DECIMAL},
+      Vipprice = #{record.vipprice,jdbcType=DECIMAL},
+      Left_number = #{record.leftNumber,jdbcType=INTEGER},
+      Sold_number = #{record.soldNumber,jdbcType=INTEGER},
       pictrue = #{record.pictrue,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -212,17 +223,20 @@
       <if test="goodid != null">
         goodID = #{goodid,jdbcType=VARCHAR},
       </if>
-      <if test="color != null">
-        color = #{color,jdbcType=VARCHAR},
-      </if>
-      <if test="size != null">
-        size = #{size,jdbcType=VARCHAR},
-      </if>
       <if test="number != null">
         number = #{number,jdbcType=INTEGER},
       </if>
       <if test="price != null">
         price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="vipprice != null">
+        Vipprice = #{vipprice,jdbcType=DECIMAL},
+      </if>
+      <if test="leftNumber != null">
+        Left_number = #{leftNumber,jdbcType=INTEGER},
+      </if>
+      <if test="soldNumber != null">
+        Sold_number = #{soldNumber,jdbcType=INTEGER},
       </if>
       <if test="pictrue != null">
         pictrue = #{pictrue,jdbcType=VARCHAR},
@@ -233,10 +247,11 @@
   <update id="updateByPrimaryKey" parameterType="com.example.ecommerce.mbg.model.GoodSku">
     update good_sku
     set goodID = #{goodid,jdbcType=VARCHAR},
-      color = #{color,jdbcType=VARCHAR},
-      size = #{size,jdbcType=VARCHAR},
       number = #{number,jdbcType=INTEGER},
       price = #{price,jdbcType=DECIMAL},
+      Vipprice = #{vipprice,jdbcType=DECIMAL},
+      Left_number = #{leftNumber,jdbcType=INTEGER},
+      Sold_number = #{soldNumber,jdbcType=INTEGER},
       pictrue = #{pictrue,jdbcType=VARCHAR}
     where SKUID = #{skuid,jdbcType=INTEGER}
   </update>

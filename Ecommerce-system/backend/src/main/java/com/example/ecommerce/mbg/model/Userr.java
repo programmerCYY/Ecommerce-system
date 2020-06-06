@@ -16,6 +16,9 @@ public class Userr implements Serializable {
     @ApiModelProperty(value = "用户的地址")
     private String usertelephone;
 
+    @ApiModelProperty(value = "用户的权限，0是普通用户，1是VIP")
+    private Integer userpower;
+
     private static final long serialVersionUID = 1L;
 
     public String getUserid() {
@@ -50,6 +53,14 @@ public class Userr implements Serializable {
         this.usertelephone = usertelephone;
     }
 
+    public Integer getUserpower() {
+        return userpower;
+    }
+
+    public void setUserpower(Integer userpower) {
+        this.userpower = userpower;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -60,6 +71,7 @@ public class Userr implements Serializable {
         sb.append(", userpassword=").append(userpassword);
         sb.append(", useraddress=").append(useraddress);
         sb.append(", usertelephone=").append(usertelephone);
+        sb.append(", userpower=").append(userpower);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

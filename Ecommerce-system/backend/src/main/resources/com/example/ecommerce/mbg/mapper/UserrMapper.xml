@@ -6,6 +6,7 @@
     <result column="Userpassword" jdbcType="VARCHAR" property="userpassword" />
     <result column="UserAddress" jdbcType="VARCHAR" property="useraddress" />
     <result column="UserTelephone" jdbcType="VARCHAR" property="usertelephone" />
+    <result column="Userpower" jdbcType="INTEGER" property="userpower" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -66,7 +67,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    UserID, Userpassword, UserAddress, UserTelephone
+    UserID, Userpassword, UserAddress, UserTelephone, Userpower
   </sql>
   <select id="selectByExample" parameterType="com.example.ecommerce.mbg.model.UserrExample" resultMap="BaseResultMap">
     select
@@ -100,9 +101,9 @@
   </delete>
   <insert id="insert" parameterType="com.example.ecommerce.mbg.model.Userr">
     insert into userr (UserID, Userpassword, UserAddress, 
-      UserTelephone)
+      UserTelephone, Userpower)
     values (#{userid,jdbcType=VARCHAR}, #{userpassword,jdbcType=VARCHAR}, #{useraddress,jdbcType=VARCHAR}, 
-      #{usertelephone,jdbcType=VARCHAR})
+      #{usertelephone,jdbcType=VARCHAR}, #{userpower,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.example.ecommerce.mbg.model.Userr">
     insert into userr
@@ -119,6 +120,9 @@
       <if test="usertelephone != null">
         UserTelephone,
       </if>
+      <if test="userpower != null">
+        Userpower,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="userid != null">
@@ -132,6 +136,9 @@
       </if>
       <if test="usertelephone != null">
         #{usertelephone,jdbcType=VARCHAR},
+      </if>
+      <if test="userpower != null">
+        #{userpower,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -156,6 +163,9 @@
       <if test="record.usertelephone != null">
         UserTelephone = #{record.usertelephone,jdbcType=VARCHAR},
       </if>
+      <if test="record.userpower != null">
+        Userpower = #{record.userpower,jdbcType=INTEGER},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -166,7 +176,8 @@
     set UserID = #{record.userid,jdbcType=VARCHAR},
       Userpassword = #{record.userpassword,jdbcType=VARCHAR},
       UserAddress = #{record.useraddress,jdbcType=VARCHAR},
-      UserTelephone = #{record.usertelephone,jdbcType=VARCHAR}
+      UserTelephone = #{record.usertelephone,jdbcType=VARCHAR},
+      Userpower = #{record.userpower,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -183,6 +194,9 @@
       <if test="usertelephone != null">
         UserTelephone = #{usertelephone,jdbcType=VARCHAR},
       </if>
+      <if test="userpower != null">
+        Userpower = #{userpower,jdbcType=INTEGER},
+      </if>
     </set>
     where UserID = #{userid,jdbcType=VARCHAR}
   </update>
@@ -190,7 +204,8 @@
     update userr
     set Userpassword = #{userpassword,jdbcType=VARCHAR},
       UserAddress = #{useraddress,jdbcType=VARCHAR},
-      UserTelephone = #{usertelephone,jdbcType=VARCHAR}
+      UserTelephone = #{usertelephone,jdbcType=VARCHAR},
+      Userpower = #{userpower,jdbcType=INTEGER}
     where UserID = #{userid,jdbcType=VARCHAR}
   </update>
 </mapper>

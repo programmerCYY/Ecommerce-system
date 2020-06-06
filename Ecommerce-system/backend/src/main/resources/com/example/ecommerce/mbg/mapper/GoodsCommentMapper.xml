@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.ecommerce.mbg.mapper.GoodsCommentMapper">
+  <resultMap id="BaseResultMap" type="com.example.ecommerce.mbg.model.GoodsComment">
+    <id column="CommentId" jdbcType="VARCHAR" property="commentid" />
+    <result column="Userid" jdbcType="VARCHAR" property="userid" />
+    <result column="TypeId" jdbcType="VARCHAR" property="typeid" />
+    <result column="Level" jdbcType="INTEGER" property="level" />
+    <result column="CommentTIme" jdbcType="TIMESTAMP" property="commenttime" />
+    <result column="State" jdbcType="INTEGER" property="state" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.example.ecommerce.mbg.model.GoodsComment">
+    <result column="Comment" jdbcType="LONGVARCHAR" property="comment" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    CommentId, Userid, TypeId, Level, CommentTIme, State
+  </sql>
+  <sql id="Blob_Column_List">
+    Comment
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.example.ecommerce.mbg.model.GoodsCommentExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from goods_comment
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.example.ecommerce.mbg.model.GoodsCommentExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from goods_comment
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from goods_comment
+    where CommentId = #{commentid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from goods_comment
+    where CommentId = #{commentid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.example.ecommerce.mbg.model.GoodsCommentExample">
+    delete from goods_comment
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.example.ecommerce.mbg.model.GoodsComment">
+    insert into goods_comment (CommentId, Userid, TypeId, 
+      Level, CommentTIme, State, 
+      Comment)
+    values (#{commentid,jdbcType=VARCHAR}, #{userid,jdbcType=VARCHAR}, #{typeid,jdbcType=VARCHAR}, 
+      #{level,jdbcType=INTEGER}, #{commenttime,jdbcType=TIMESTAMP}, #{state,jdbcType=INTEGER}, 
+      #{comment,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.ecommerce.mbg.model.GoodsComment">
+    insert into goods_comment
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="commentid != null">
+        CommentId,
+      </if>
+      <if test="userid != null">
+        Userid,
+      </if>
+      <if test="typeid != null">
+        TypeId,
+      </if>
+      <if test="level != null">
+        Level,
+      </if>
+      <if test="commenttime != null">
+        CommentTIme,
+      </if>
+      <if test="state != null">
+        State,
+      </if>
+      <if test="comment != null">
+        Comment,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="commentid != null">
+        #{commentid,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null">
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="typeid != null">
+        #{typeid,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null">
+        #{level,jdbcType=INTEGER},
+      </if>
+      <if test="commenttime != null">
+        #{commenttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="comment != null">
+        #{comment,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.example.ecommerce.mbg.model.GoodsCommentExample" resultType="java.lang.Long">
+    select count(*) from goods_comment
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update goods_comment
+    <set>
+      <if test="record.commentid != null">
+        CommentId = #{record.commentid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userid != null">
+        Userid = #{record.userid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.typeid != null">
+        TypeId = #{record.typeid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.level != null">
+        Level = #{record.level,jdbcType=INTEGER},
+      </if>
+      <if test="record.commenttime != null">
+        CommentTIme = #{record.commenttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.state != null">
+        State = #{record.state,jdbcType=INTEGER},
+      </if>
+      <if test="record.comment != null">
+        Comment = #{record.comment,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update goods_comment
+    set CommentId = #{record.commentid,jdbcType=VARCHAR},
+      Userid = #{record.userid,jdbcType=VARCHAR},
+      TypeId = #{record.typeid,jdbcType=VARCHAR},
+      Level = #{record.level,jdbcType=INTEGER},
+      CommentTIme = #{record.commenttime,jdbcType=TIMESTAMP},
+      State = #{record.state,jdbcType=INTEGER},
+      Comment = #{record.comment,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update goods_comment
+    set CommentId = #{record.commentid,jdbcType=VARCHAR},
+      Userid = #{record.userid,jdbcType=VARCHAR},
+      TypeId = #{record.typeid,jdbcType=VARCHAR},
+      Level = #{record.level,jdbcType=INTEGER},
+      CommentTIme = #{record.commenttime,jdbcType=TIMESTAMP},
+      State = #{record.state,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.ecommerce.mbg.model.GoodsComment">
+    update goods_comment
+    <set>
+      <if test="userid != null">
+        Userid = #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="typeid != null">
+        TypeId = #{typeid,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null">
+        Level = #{level,jdbcType=INTEGER},
+      </if>
+      <if test="commenttime != null">
+        CommentTIme = #{commenttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="state != null">
+        State = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="comment != null">
+        Comment = #{comment,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where CommentId = #{commentid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.example.ecommerce.mbg.model.GoodsComment">
+    update goods_comment
+    set Userid = #{userid,jdbcType=VARCHAR},
+      TypeId = #{typeid,jdbcType=VARCHAR},
+      Level = #{level,jdbcType=INTEGER},
+      CommentTIme = #{commenttime,jdbcType=TIMESTAMP},
+      State = #{state,jdbcType=INTEGER},
+      Comment = #{comment,jdbcType=LONGVARCHAR}
+    where CommentId = #{commentid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.ecommerce.mbg.model.GoodsComment">
+    update goods_comment
+    set Userid = #{userid,jdbcType=VARCHAR},
+      TypeId = #{typeid,jdbcType=VARCHAR},
+      Level = #{level,jdbcType=INTEGER},
+      CommentTIme = #{commenttime,jdbcType=TIMESTAMP},
+      State = #{state,jdbcType=INTEGER}
+    where CommentId = #{commentid,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -19,15 +19,18 @@ import java.util.stream.Collectors;
 public class AdminUserDetails implements UserDetails {
 
     @Autowired
-    private Manager manager;
+    private Userpermission userpermission;
 
     private List<Userpermission> userpermissionList;
 
+    private String password;
 
-    public AdminUserDetails(Manager manager,List<Userpermission> userpermissionList)
+    public AdminUserDetails(Userpermission userper,List<Userpermission> userpermissionList,String password)
     {
-        this.manager=manager;
+        this.userpermission=userper;
         this.userpermissionList=userpermissionList;
+        this.password=password;
+        System.out.println("2"+this.password);
     }
 
     @Override
@@ -40,12 +43,12 @@ public class AdminUserDetails implements UserDetails {
 
     @Override
     public String getPassword() {
-        return manager.getAdminword();
+        return password;
     }
 
     @Override
     public String getUsername() {
-        return manager.getAdminid();
+        return userpermission.getName();
     }
 
     @Override

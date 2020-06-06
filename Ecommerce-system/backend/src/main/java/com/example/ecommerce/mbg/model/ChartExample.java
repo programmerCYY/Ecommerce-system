@@ -434,6 +434,66 @@ public class ChartExample {
             addCriterion("price not between", value1, value2, "price");
             return (Criteria) this;
         }
+
+        public Criteria andCheckstateIsNull() {
+            addCriterion("CheckState is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCheckstateIsNotNull() {
+            addCriterion("CheckState is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCheckstateEqualTo(Integer value) {
+            addCriterion("CheckState =", value, "checkstate");
+            return (Criteria) this;
+        }
+
+        public Criteria andCheckstateNotEqualTo(Integer value) {
+            addCriterion("CheckState <>", value, "checkstate");
+            return (Criteria) this;
+        }
+
+        public Criteria andCheckstateGreaterThan(Integer value) {
+            addCriterion("CheckState >", value, "checkstate");
+            return (Criteria) this;
+        }
+
+        public Criteria andCheckstateGreaterThanOrEqualTo(Integer value) {
+            addCriterion("CheckState >=", value, "checkstate");
+            return (Criteria) this;
+        }
+
+        public Criteria andCheckstateLessThan(Integer value) {
+            addCriterion("CheckState <", value, "checkstate");
+            return (Criteria) this;
+        }
+
+        public Criteria andCheckstateLessThanOrEqualTo(Integer value) {
+            addCriterion("CheckState <=", value, "checkstate");
+            return (Criteria) this;
+        }
+
+        public Criteria andCheckstateIn(List<Integer> values) {
+            addCriterion("CheckState in", values, "checkstate");
+            return (Criteria) this;
+        }
+
+        public Criteria andCheckstateNotIn(List<Integer> values) {
+            addCriterion("CheckState not in", values, "checkstate");
+            return (Criteria) this;
+        }
+
+        public Criteria andCheckstateBetween(Integer value1, Integer value2) {
+            addCriterion("CheckState between", value1, value2, "checkstate");
+            return (Criteria) this;
+        }
+
+        public Criteria andCheckstateNotBetween(Integer value1, Integer value2) {
+            addCriterion("CheckState not between", value1, value2, "checkstate");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

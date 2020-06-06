@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.ecommerce.mbg.mapper.GoodsCategoryMapper">
+  <resultMap id="BaseResultMap" type="com.example.ecommerce.mbg.model.GoodsCategory">
+    <id column="Id" jdbcType="INTEGER" property="id" />
+    <result column="CategoryId" jdbcType="VARCHAR" property="categoryid" />
+    <result column="SellerId" jdbcType="VARCHAR" property="sellerid" />
+    <result column="Goodsname" jdbcType="VARCHAR" property="goodsname" />
+    <result column="pic" jdbcType="VARCHAR" property="pic" />
+    <result column="CategoryDegree" jdbcType="INTEGER" property="categorydegree" />
+    <result column="Number" jdbcType="INTEGER" property="number" />
+    <result column="Danwei" jdbcType="VARCHAR" property="danwei" />
+    <result column="ShowState" jdbcType="INTEGER" property="showstate" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.example.ecommerce.mbg.model.GoodsCategory">
+    <result column="Descipt" jdbcType="LONGVARCHAR" property="descipt" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    Id, CategoryId, SellerId, Goodsname, pic, CategoryDegree, Number, Danwei, ShowState
+  </sql>
+  <sql id="Blob_Column_List">
+    Descipt
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.example.ecommerce.mbg.model.GoodsCategoryExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from goods_category
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.example.ecommerce.mbg.model.GoodsCategoryExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from goods_category
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from goods_category
+    where Id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from goods_category
+    where Id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.example.ecommerce.mbg.model.GoodsCategoryExample">
+    delete from goods_category
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.example.ecommerce.mbg.model.GoodsCategory">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into goods_category (CategoryId, SellerId, Goodsname, 
+      pic, CategoryDegree, Number, 
+      Danwei, ShowState, Descipt
+      )
+    values (#{categoryid,jdbcType=VARCHAR}, #{sellerid,jdbcType=VARCHAR}, #{goodsname,jdbcType=VARCHAR}, 
+      #{pic,jdbcType=VARCHAR}, #{categorydegree,jdbcType=INTEGER}, #{number,jdbcType=INTEGER}, 
+      #{danwei,jdbcType=VARCHAR}, #{showstate,jdbcType=INTEGER}, #{descipt,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.ecommerce.mbg.model.GoodsCategory">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into goods_category
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="categoryid != null">
+        CategoryId,
+      </if>
+      <if test="sellerid != null">
+        SellerId,
+      </if>
+      <if test="goodsname != null">
+        Goodsname,
+      </if>
+      <if test="pic != null">
+        pic,
+      </if>
+      <if test="categorydegree != null">
+        CategoryDegree,
+      </if>
+      <if test="number != null">
+        Number,
+      </if>
+      <if test="danwei != null">
+        Danwei,
+      </if>
+      <if test="showstate != null">
+        ShowState,
+      </if>
+      <if test="descipt != null">
+        Descipt,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="categoryid != null">
+        #{categoryid,jdbcType=VARCHAR},
+      </if>
+      <if test="sellerid != null">
+        #{sellerid,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsname != null">
+        #{goodsname,jdbcType=VARCHAR},
+      </if>
+      <if test="pic != null">
+        #{pic,jdbcType=VARCHAR},
+      </if>
+      <if test="categorydegree != null">
+        #{categorydegree,jdbcType=INTEGER},
+      </if>
+      <if test="number != null">
+        #{number,jdbcType=INTEGER},
+      </if>
+      <if test="danwei != null">
+        #{danwei,jdbcType=VARCHAR},
+      </if>
+      <if test="showstate != null">
+        #{showstate,jdbcType=INTEGER},
+      </if>
+      <if test="descipt != null">
+        #{descipt,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.example.ecommerce.mbg.model.GoodsCategoryExample" resultType="java.lang.Long">
+    select count(*) from goods_category
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update goods_category
+    <set>
+      <if test="record.id != null">
+        Id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.categoryid != null">
+        CategoryId = #{record.categoryid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sellerid != null">
+        SellerId = #{record.sellerid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodsname != null">
+        Goodsname = #{record.goodsname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pic != null">
+        pic = #{record.pic,jdbcType=VARCHAR},
+      </if>
+      <if test="record.categorydegree != null">
+        CategoryDegree = #{record.categorydegree,jdbcType=INTEGER},
+      </if>
+      <if test="record.number != null">
+        Number = #{record.number,jdbcType=INTEGER},
+      </if>
+      <if test="record.danwei != null">
+        Danwei = #{record.danwei,jdbcType=VARCHAR},
+      </if>
+      <if test="record.showstate != null">
+        ShowState = #{record.showstate,jdbcType=INTEGER},
+      </if>
+      <if test="record.descipt != null">
+        Descipt = #{record.descipt,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update goods_category
+    set Id = #{record.id,jdbcType=INTEGER},
+      CategoryId = #{record.categoryid,jdbcType=VARCHAR},
+      SellerId = #{record.sellerid,jdbcType=VARCHAR},
+      Goodsname = #{record.goodsname,jdbcType=VARCHAR},
+      pic = #{record.pic,jdbcType=VARCHAR},
+      CategoryDegree = #{record.categorydegree,jdbcType=INTEGER},
+      Number = #{record.number,jdbcType=INTEGER},
+      Danwei = #{record.danwei,jdbcType=VARCHAR},
+      ShowState = #{record.showstate,jdbcType=INTEGER},
+      Descipt = #{record.descipt,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update goods_category
+    set Id = #{record.id,jdbcType=INTEGER},
+      CategoryId = #{record.categoryid,jdbcType=VARCHAR},
+      SellerId = #{record.sellerid,jdbcType=VARCHAR},
+      Goodsname = #{record.goodsname,jdbcType=VARCHAR},
+      pic = #{record.pic,jdbcType=VARCHAR},
+      CategoryDegree = #{record.categorydegree,jdbcType=INTEGER},
+      Number = #{record.number,jdbcType=INTEGER},
+      Danwei = #{record.danwei,jdbcType=VARCHAR},
+      ShowState = #{record.showstate,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.ecommerce.mbg.model.GoodsCategory">
+    update goods_category
+    <set>
+      <if test="categoryid != null">
+        CategoryId = #{categoryid,jdbcType=VARCHAR},
+      </if>
+      <if test="sellerid != null">
+        SellerId = #{sellerid,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsname != null">
+        Goodsname = #{goodsname,jdbcType=VARCHAR},
+      </if>
+      <if test="pic != null">
+        pic = #{pic,jdbcType=VARCHAR},
+      </if>
+      <if test="categorydegree != null">
+        CategoryDegree = #{categorydegree,jdbcType=INTEGER},
+      </if>
+      <if test="number != null">
+        Number = #{number,jdbcType=INTEGER},
+      </if>
+      <if test="danwei != null">
+        Danwei = #{danwei,jdbcType=VARCHAR},
+      </if>
+      <if test="showstate != null">
+        ShowState = #{showstate,jdbcType=INTEGER},
+      </if>
+      <if test="descipt != null">
+        Descipt = #{descipt,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.example.ecommerce.mbg.model.GoodsCategory">
+    update goods_category
+    set CategoryId = #{categoryid,jdbcType=VARCHAR},
+      SellerId = #{sellerid,jdbcType=VARCHAR},
+      Goodsname = #{goodsname,jdbcType=VARCHAR},
+      pic = #{pic,jdbcType=VARCHAR},
+      CategoryDegree = #{categorydegree,jdbcType=INTEGER},
+      Number = #{number,jdbcType=INTEGER},
+      Danwei = #{danwei,jdbcType=VARCHAR},
+      ShowState = #{showstate,jdbcType=INTEGER},
+      Descipt = #{descipt,jdbcType=LONGVARCHAR}
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.ecommerce.mbg.model.GoodsCategory">
+    update goods_category
+    set CategoryId = #{categoryid,jdbcType=VARCHAR},
+      SellerId = #{sellerid,jdbcType=VARCHAR},
+      Goodsname = #{goodsname,jdbcType=VARCHAR},
+      pic = #{pic,jdbcType=VARCHAR},
+      CategoryDegree = #{categorydegree,jdbcType=INTEGER},
+      Number = #{number,jdbcType=INTEGER},
+      Danwei = #{danwei,jdbcType=VARCHAR},
+      ShowState = #{showstate,jdbcType=INTEGER}
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

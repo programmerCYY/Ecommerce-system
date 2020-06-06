@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 
 public class Chart implements Serializable {
+    @ApiModelProperty(value = "自增Id")
     private String chartid;
 
     @ApiModelProperty(value = "用户ID")
@@ -18,6 +19,9 @@ public class Chart implements Serializable {
 
     @ApiModelProperty(value = "价钱")
     private BigDecimal price;
+
+    @ApiModelProperty(value = "结算状态，0为false，1为true")
+    private Integer checkstate;
 
     private static final long serialVersionUID = 1L;
 
@@ -61,6 +65,14 @@ public class Chart implements Serializable {
         this.price = price;
     }
 
+    public Integer getCheckstate() {
+        return checkstate;
+    }
+
+    public void setCheckstate(Integer checkstate) {
+        this.checkstate = checkstate;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -72,6 +84,7 @@ public class Chart implements Serializable {
         sb.append(", goodid=").append(goodid);
         sb.append(", number=").append(number);
         sb.append(", price=").append(price);
+        sb.append(", checkstate=").append(checkstate);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

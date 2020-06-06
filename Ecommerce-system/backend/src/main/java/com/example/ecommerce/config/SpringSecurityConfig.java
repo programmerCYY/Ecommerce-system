@@ -7,6 +7,7 @@ import com.example.ecommerce.dto.AdminUserDetails;
 import com.example.ecommerce.mbg.model.Manager;
 import com.example.ecommerce.mbg.model.Userpermission;
 import com.example.ecommerce.service.ManagerService;
+import com.example.ecommerce.service.UserpermissionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -42,8 +43,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private RestAuthenticationEntryPoint restAuthenticationEntryPoint;
 
-    @Autowired(required = false)
-    private ManagerService managerService;
+    @Autowired
+    private UserpermissionService userpermissionService;
 
 
     @Override
@@ -104,6 +105,15 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public UserDetailsService userDetailsService(){
         //获取登录用户信息
-        return username->managerService.loadUserByUsername(username);
+        return username->{
+            Userpermission userpermission = userpermissionService.getPeopleByUsername(username);
+            if(userpermission!=null){
+                List<Userpermission> permissionList = userpermissionService.getPermissionList(userpermission.getName());
+                String password = userpermissionService.getPassword(username);
+                System.out.println("1"+password);
+                return new AdminUserDetails(userpermission,permissionList,password);
+            }throw new UsernameNotFoundException("用户名或密码错误");
+
+        };
     }
 }

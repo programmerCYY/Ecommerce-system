@@ -5,16 +5,20 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class Userpermission implements Serializable {
+    @ApiModelProperty(value = "自增Id")
     private Integer id;
 
+    @ApiModelProperty(value = "用户名 ")
     private String name;
 
     @ApiModelProperty(value = "权限值")
     private String value;
 
-    private String userid;
-
+    @ApiModelProperty(value = "创建时间")
     private Date createtime;
+
+    @ApiModelProperty(value = "角色，0是用户，1是商家")
+    private Integer role;
 
     private static final long serialVersionUID = 1L;
 
@@ -42,20 +46,20 @@ public class Userpermission implements Serializable {
         this.value = value;
     }
 
-    public String getUserid() {
-        return userid;
-    }
-
-    public void setUserid(String userid) {
-        this.userid = userid;
-    }
-
     public Date getCreatetime() {
         return createtime;
     }
 
     public void setCreatetime(Date createtime) {
         this.createtime = createtime;
+    }
+
+    public Integer getRole() {
+        return role;
+    }
+
+    public void setRole(Integer role) {
+        this.role = role;
     }
 
     @Override
@@ -67,8 +71,8 @@ public class Userpermission implements Serializable {
         sb.append(", id=").append(id);
         sb.append(", name=").append(name);
         sb.append(", value=").append(value);
-        sb.append(", userid=").append(userid);
         sb.append(", createtime=").append(createtime);
+        sb.append(", role=").append(role);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

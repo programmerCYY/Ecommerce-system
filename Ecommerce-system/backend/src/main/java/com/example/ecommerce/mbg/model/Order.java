@@ -5,19 +5,25 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class Order implements Serializable {
+    @ApiModelProperty(value = "订单号")
     private String orderid;
 
+    @ApiModelProperty(value = "用户名")
     private String userid;
 
     @ApiModelProperty(value = "0未支付，1已支付，2申请退，3已退，4超时")
     private Integer state;
 
+    @ApiModelProperty(value = "支付时间")
     private Date paytime;
 
+    @ApiModelProperty(value = "收货时间")
     private Date gettime;
 
+    @ApiModelProperty(value = "评论时间")
     private Date commenttime;
 
+    @ApiModelProperty(value = "评论")
     private String comment;
 
     private static final long serialVersionUID = 1L;

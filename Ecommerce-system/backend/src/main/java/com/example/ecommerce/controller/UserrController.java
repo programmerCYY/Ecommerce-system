@@ -1,12 +1,18 @@
 package com.example.ecommerce.controller;
 
 import com.example.ecommerce.common.api.CommonResult;
+import com.example.ecommerce.dto.LoginParam;
 import com.example.ecommerce.service.UserrService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author: rain
@@ -21,6 +27,8 @@ public class UserrController {
     @Autowired
     private UserrService userrService;
 
+    @Value("${jwt.tokenHead}")
+    private String tokenHead;
 
     @ApiOperation("普通用户的注册")
     @RequestMapping(value = "/Userrregister",method = RequestMethod.GET)
@@ -33,11 +41,21 @@ public class UserrController {
     }
 
     @ApiOperation("普通用户登录")
-    @RequestMapping(value = "/Userrlogin",method = RequestMethod.GET)
+    @RequestMapping(value = "/Userrlogin",method = RequestMethod.POST)
     @ResponseBody
-    public String login(@RequestParam String username,
-                              @RequestParam String password)
+    public CommonResult login(@RequestBody LoginParam loginParam,
+                              BindingResult bindingResult)
     {
-        return userrService.login(username, password);
+        String token = userrService.login(loginParam.getUsername(), loginParam.getPassword());
+        System.out.println("fff"+token);
+        if(token == null)
+        {
+            return CommonResult.validateFailed("用户名或密码错误");
+        }
+        Map<String,String> map = new HashMap<>();
+        map.put("token",token);
+        map.put("tokenhead",tokenHead);
+
+        return CommonResult.success(map);
     }
 }

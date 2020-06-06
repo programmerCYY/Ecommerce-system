@@ -383,6 +383,66 @@ public class UserrExample {
             addCriterion("UserTelephone not between", value1, value2, "usertelephone");
             return (Criteria) this;
         }
+
+        public Criteria andUserpowerIsNull() {
+            addCriterion("Userpower is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserpowerIsNotNull() {
+            addCriterion("Userpower is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserpowerEqualTo(Integer value) {
+            addCriterion("Userpower =", value, "userpower");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserpowerNotEqualTo(Integer value) {
+            addCriterion("Userpower <>", value, "userpower");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserpowerGreaterThan(Integer value) {
+            addCriterion("Userpower >", value, "userpower");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserpowerGreaterThanOrEqualTo(Integer value) {
+            addCriterion("Userpower >=", value, "userpower");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserpowerLessThan(Integer value) {
+            addCriterion("Userpower <", value, "userpower");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserpowerLessThanOrEqualTo(Integer value) {
+            addCriterion("Userpower <=", value, "userpower");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserpowerIn(List<Integer> values) {
+            addCriterion("Userpower in", values, "userpower");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserpowerNotIn(List<Integer> values) {
+            addCriterion("Userpower not in", values, "userpower");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserpowerBetween(Integer value1, Integer value2) {
+            addCriterion("Userpower between", value1, value2, "userpower");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserpowerNotBetween(Integer value1, Integer value2) {
+            addCriterion("Userpower not between", value1, value2, "userpower");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

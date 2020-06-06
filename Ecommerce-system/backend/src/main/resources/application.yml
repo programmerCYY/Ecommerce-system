@@ -11,6 +11,24 @@ spring:
       roles: admin
       name: xykkk
       password: 123456
+  redis:
+    host: 127.0.0.1
+    database: 0
+    port: 6379
+    lettuce:
+      pool:
+        max-active: 8
+        max-idle: 8
+        max-wait: -1ms
+        min-idle: 0
+    timeout: 3000ms
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: xykkk
+    password: 123456
+    publisher-returns: on
+    virtual-host: /ecommerce
 
 
 mybatis:
