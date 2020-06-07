@@ -6,6 +6,7 @@
 		"es6": true,
 		"enhance": true,
 		"postcss": true,
+		"preloadBackgroundData": false,
 		"minified": true,
 		"newFeature": true,
 		"coverView": true,
@@ -19,7 +20,9 @@
 			"ignore": [],
 			"disablePlugins": [],
 			"outputPath": ""
-		}
+		},
+		"useCompilerModule": false,
+		"userConfirmedUseCompilerModuleSwitch": false
 	},
 	"appid": "wx0a29bff979c7132f",
 	"projectname": "test",
@@ -75,6 +78,8 @@
 					"id": -1,
 					"name": "商家",
 					"pathName": "pages/seller/seller",
+					"name": "详情",
+					"pathName": "pages/good-detail/good-detail",
 					"query": "",
 					"scene": null
 				},
@@ -83,6 +88,8 @@
 					"name": "pages/delete-good/delete-good",
 					"pathName": "pages/delete-good/delete-good",
 					"query": "",
+					"name": "order",
+					"pathName": "pages/order/order",
 					"scene": null
 				}
 			]

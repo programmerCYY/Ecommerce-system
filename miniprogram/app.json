@@ -1,5 +1,5 @@
 {
-   "pages": [
+  "pages": [
     "pages/base/base",
     "pages/mine/mine",
     "pages/good-detail/good-detail",
@@ -9,7 +9,9 @@
     "pages/sellerlogin/sellerlogin",
     "pages/delete-good/delete-good",
     "pages/good-change/good-change",
-    "pages/manager-order/manager-order"
+    "pages/manager-order/manager-order",
+    "pages/dingdan",
+    "pages/order/order"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
@@ -20,23 +22,24 @@
   "tabBar": {
     "color": "#ccc",
     "selectedColor": "#f00",
-    "list": [{
+    "list": [
+      {
         "pagePath": "pages/base/base",
         "text": "首页",
         "iconPath": "images/btn-tabs_01.png",
         "selectedIconPath": "images/btn-tabs_08.png"
-      },{
+      },
+      {
         "pagePath": "pages/cart/cart",
         "text": "购物车",
         "iconPath": "images/btn-tabs_05.png",
         "selectedIconPath": "images/btn-tabs_09.png"
-      }
-      ,
+      },
       {
-        "pagePath":"pages/mine/mine",
-        "text":"个人",
-        "iconPath":"images/btn-tabs_06.png",
-        "selectedIconPath":"images/btn-tabs_10.png"
+        "pagePath": "pages/mine/mine",
+        "text": "个人",
+        "iconPath": "images/btn-tabs_06.png",
+        "selectedIconPath": "images/btn-tabs_10.png"
       }
       ,
       {
