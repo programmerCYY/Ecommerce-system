@@ -1,0 +1,46 @@
+<!--pages/seller/seller.wxml-->
+<view class="good-list">
+  <view class="item" wx:for="{{goodData}}" wx:key="*this" data-goodid="{{item.GoodsNo}}" bindtap="jumptogood">
+    <view class="pic">
+      <image src="{{item.GoodsImage}}"></image>
+    </view>
+    <view class="content">
+      <view class="text">
+        <view class="title">{{item.Title}}</view>
+        <view class="type" wx:for="{{item.attrValueList}}" wx:key="*this">{{item.attrValue}}</view>
+      </view>
+      <view class="desc">{{item.GoodsNo}}</view>
+      <view class="sellandstock">
+        <view class="price">${{item.SaleAmount}}</view>
+        <view class="stock">库存：{{item.Stock}}</view>
+        <view class="sell">销量：{{item.SellNum}}</view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class="detail-box"></view>
+
+<view class="bottom-nav">
+  <view class="daohan" bindtap="addgood">
+    <view class="iconfont iconshangjia"></view>
+    <view>上架</view>
+  </view>
+
+  <view class="daohan" bindtap="deletegood">
+    <view class="iconfont iconxiajia"></view>
+    <view>下架</view>
+  </view>
+
+  <view class="daohan" bindtap="manageorder" data-sellerid="{{item.sellerid}}">
+    <view class="iconfont iconguanli"></view>
+    <view>管理订单</view>
+  </view>
+
+  <view class="daohan" bindtap="change">
+    <view class="iconfont icontiaozhengfeiyong"></view>
+    <view>调整商品</view>
+  </view>
+
+</view>
+<!--底部导航-->

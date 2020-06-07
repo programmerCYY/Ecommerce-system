@@ -1,0 +1,22 @@
+<!--pages/sellerlogin/sellerlogin.wxml-->
+<view class="nothing"></view>
+
+<view class="form">
+  <view class="row-group">
+    <text>账号</text>
+    <input placeholder="请填写商家账号" placeholder-class='txt' maxlength='11' value="{{account}}" bindinput="AccountInput" />
+  </view>
+
+  <view class="row-group">
+    <text>密码</text>
+    <input placeholder="请填写密码" placeholder-class='txt' maxlength='11' value="{{password}}" bindinput="PasswordInput" />
+  </view>
+</view>
+
+<view class="login">
+  <button class="loginbutton" type="primary" bindtap="login">登陆</button>
+</view>
+
+<view class="zhuce">
+  <button class="zhucebutton" type="primary" bindtap="zhuce">注册</button>
+</view>

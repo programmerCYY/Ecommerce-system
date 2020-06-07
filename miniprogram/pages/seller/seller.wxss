@@ -1,0 +1,84 @@
+/* pages/seller/seller.wxss */
+
+.good-list .item {
+  display: flex;
+  padding: 30rpx 20rpx;
+  border-bottom: solid 2rpx #999;
+}
+
+.good-list .item .pic {
+  width: 200rpx;
+  height: 200rpx;
+}
+
+.good-list .item .pic image {
+  width: 200rpx;
+  height: 200rpx;
+}
+
+.good-list .item .content {
+  margin-left: 20rpx;
+}
+
+.good-list .item .content .text {
+  display: flex;
+}
+
+.good-list .item .content .text .title {
+  font-size: 32rpx;
+}
+
+.good-list .item .content .text .type {
+  font-size: 32rpx;
+  padding: 0 12rpx;
+}
+
+.good-list .item .content .desc {
+  font-size: 24rpx;
+  color: #999;
+  margin-top: 20rpx;
+}
+
+.good-list .item .content .sellandstock {
+  display: flex;
+}
+
+.good-list .item .content .sell {
+  margin-top: 20rpx;
+  font-size: 32rpx;
+  padding:0 10rpx;
+}
+
+.good-list .item .content .stock {
+  margin-top: 20rpx;
+  font-size: 32rpx;
+  padding:0 10rpx;
+}
+
+.good-list .item .content .price {
+  color: red;
+  margin-top: 20rpx;
+  font-size: 32rpx;
+}
+
+/*以左0底0为基准固定*/
+
+.bottom-nav {
+  height: 130rpx;
+  width: 100%;
+  display: flex;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  background: white;
+}
+
+.bottom-nav .daohan {
+  flex: 0.5;
+  text-align: center;
+  font-size: 28rpx;
+}
+
+.detail-box {
+  padding: 25rpx 25rpx 140rpx;
+}

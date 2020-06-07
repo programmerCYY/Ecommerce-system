@@ -9,7 +9,7 @@ Page({
     autoplay: true,
     interval: 2000,
     duration: 500,
-    navbar: ['今日推荐', '时尚', '国际', '美妆', '母婴', '居家'],
+    navbar: ['全部', '手机'],
     currentTab: 0,//默认加载第0个页面
     goodData: [{
       "Id": 49,
@@ -105,7 +105,7 @@ Page({
     //点击后要获取商品的数据（一般是ID）
     //在进行跳转，将goodid给商品详情页
     let goodno=e.currentTarget.dataset.goodid;
-    console.log(goodno)
+    //console.log(goodno)打印出商品号
     wx.navigateTo({
       url: '/pages/good-detail/good-detail?goodno='+goodno,
     })

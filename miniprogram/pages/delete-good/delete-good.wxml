@@ -1,0 +1,11 @@
+<!--pages/delete-good/delete-good.wxml-->
+<view class="form">
+  <view class="row-group">
+    <text>商品ID号</text>
+    <input placeholder="请填写要下架的商品ID号" placeholder-class='txt' maxlength='15' value="{{account}}" bindinput="AccountInput" />
+  </view>
+  </view>
+
+  <view class="submit">
+  <button class="submitbutton" type="primary" bindtap="submit">下架</button>
+</view>

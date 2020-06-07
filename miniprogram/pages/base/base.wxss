@@ -43,26 +43,7 @@ width: 100%;
 height: 100%;
 }
 /*元素加了浮动后要给父元素清除*/
-.nav-box .nav{
-  width:2000rpx;
-  overflow: hidden;
-}
 
-.nav-box .nav .item{
-  width:100rpx;
-  height: 60rpx;
-  line-height:60rpx; 
-  border: solid 2rpx;
-  text-align: center;
-  font-size: 28rpx;
-  margin-left: 20rpx;
-  border-radius: 20rpx;
-  float:left;
-}
-
-.nav-box .nav .item.current{
-  color:green;
-}
 
 .good-list .item{
   display: flex;

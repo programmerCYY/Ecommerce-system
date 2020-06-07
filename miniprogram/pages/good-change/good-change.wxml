@@ -1,0 +1,25 @@
+<!--pages/good-change/good-change.wxml-->
+<view class="form">
+  <view class="row-group">
+    <text>商品SKU-ID号</text>
+    <input placeholder="请填写改变的商品SKU-ID号" placeholder-class='txt' maxlength='15' value="{{account}}" bindinput="AccountInput" />
+  </view>
+  
+  <view class="row-group">
+    <text>价格</text>
+    <input placeholder="请填写商品价格" placeholder-class='txt' maxlength='15' value="{{account}}" bindinput="PriceInput" />
+  </view>
+  
+
+
+  <view class="row-group">
+    <text>库存</text>
+    <input placeholder="请填写商品的库存" placeholder-class='txt' maxlength='15' value="{{account}}" bindinput="StockInput" />
+  </view>
+ 
+
+  <view class="submit">
+  <button class="submitbutton" type="primary" bindtap="submit">提交</button>
+</view>
+
+</view>

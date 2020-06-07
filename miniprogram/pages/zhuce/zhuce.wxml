@@ -17,6 +17,6 @@
   </view>
 
   <view>
-    <button class="submit"  open-type="getUserInfo" bindtap="onClickSubmit">注册</button>
+    <button class="submit"  open-type="getUserInfo" bindtap="onClickzhuce">注册</button>
   </view>
 </view>

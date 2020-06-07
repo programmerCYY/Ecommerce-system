@@ -20,19 +20,8 @@
   </view>
 </view>
 
-<!--分类导航-->
-<view class="nav-box">
-  <scroll-view scroll-x="{{true}}">
-    <view class="nav">
-      <view class="item ">全部</view>
-      <view class="item current">手机</view>
-    </view>
-  </scroll-view>
-</view>
-
-
 <view class="good-list">
-  <view class="item" wx:for="{{goodData}}" data-goodid="{{item.GoodsNo}}" bindtap="jumptogood">
+  <view class="item" wx:for="{{goodData}}" wx:key="*this" data-goodid="{{item.GoodsNo}}" bindtap="jumptogood">
     <view class="pic">
       <image src="{{item.GoodsImage}}"></image>
     </view>

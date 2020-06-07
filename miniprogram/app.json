@@ -1,10 +1,15 @@
 {
    "pages": [
     "pages/base/base",
-    "pages/cloud/cloud",
     "pages/mine/mine",
     "pages/good-detail/good-detail",
-    "pages/cart/cart"
+    "pages/cart/cart",
+    "pages/test/test",
+    "pages/seller/seller",
+    "pages/sellerlogin/sellerlogin",
+    "pages/delete-good/delete-good",
+    "pages/good-change/good-change",
+    "pages/manager-order/manager-order"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
@@ -32,6 +37,13 @@
         "text":"个人",
         "iconPath":"images/btn-tabs_06.png",
         "selectedIconPath":"images/btn-tabs_10.png"
+      }
+      ,
+      {
+        "pagePath": "pages/sellerlogin/sellerlogin",
+        "text": "商家",
+        "iconPath": "images/btn-tabs_06.png",
+        "selectedIconPath": "images/btn-tabs_10.png"
       }
       ]
   },
