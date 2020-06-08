@@ -12,9 +12,10 @@ spring:
       name: xykkk
       password: 123456
   redis:
-    host: 127.0.0.1
+    host: localhost
     database: 0
     port: 6379
+    password: 123456
     lettuce:
       pool:
         max-active: 8
@@ -23,7 +24,7 @@ spring:
         min-idle: 0
     timeout: 3000ms
   rabbitmq:
-    host: 127.0.0.1
+    host: localhost
     port: 5672
     username: xykkk
     password: 123456

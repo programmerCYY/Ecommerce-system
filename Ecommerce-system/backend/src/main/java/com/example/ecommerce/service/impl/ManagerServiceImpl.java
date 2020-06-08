@@ -9,6 +9,7 @@ import com.example.ecommerce.mbg.model.ManagerExample;
 import com.example.ecommerce.mbg.model.Userpermission;
 import com.example.ecommerce.mbg.model.UserpermissionExample;
 import com.example.ecommerce.service.ManagerService;
+import com.example.ecommerce.service.UserpermissionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -18,6 +19,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -26,6 +28,7 @@ import java.util.List;
  * @date: 2020/6/2 17:48
  * @description:
  */
+@Service
 public class ManagerServiceImpl implements ManagerService {
 
 
@@ -34,6 +37,9 @@ public class ManagerServiceImpl implements ManagerService {
 
     @Autowired(required = false)
     private ManagerMapper managerMapper;
+
+    @Autowired
+    private UserpermissionService userpermissionService;
 
     @Autowired(required = false)
     private UserpermissionMapper userpermissionMapper;
@@ -47,47 +53,6 @@ public class ManagerServiceImpl implements ManagerService {
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
 
-    @Override
-    public Manager getManagerByUsername(String userid) {
-        ManagerExample managerExample = new ManagerExample();
-        managerExample.createCriteria().andAdminidEqualTo(userid);
-        List<Manager> list = managerMapper.selectByExample(managerExample);
-        if(list!=null&&list.size()>0)
-        {
-            return list.get(0);
-        }
-
-        return null;
-    }
-
-    @Override
-    public List<Userpermission> getPermissionList(String token) {
-        UserpermissionExample userpermissionExample = new UserpermissionExample();
-        userpermissionExample.createCriteria().andUseridEqualTo(token);
-        List<Userpermission> list = userpermissionMapper.selectByExample(userpermissionExample);
-        if(list!=null)
-            return list;
-        return null;
-    }
-
-    @Override
-    public String getPassword(String userid) {
-        ManagerExample managerExample = new ManagerExample();
-        managerExample.createCriteria().andAdminidEqualTo(userid);
-        List<Manager> managerList = managerMapper.selectByExample(managerExample);
-
-        return "";
-    }
-
-    @Override
-    public UserDetails loadUserByUsername(String username) {
-        Manager manager = managerService.getManagerByUsername(username);
-        if(manager!=null){
-            List<Userpermission> permissionList = managerService.getPermissionList(manager.getAdminid());
-            String password = managerService.getPassword(username);
-            return new AdminUserDetails(manager,permissionList);
-        }throw new UsernameNotFoundException("用户名或密码错误");
-    }
 
     @Override
     public String login(String username, String password) {

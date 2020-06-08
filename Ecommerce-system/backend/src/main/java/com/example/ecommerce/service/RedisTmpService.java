@@ -1,5 +1,7 @@
 package com.example.ecommerce.service;
 
+import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -9,6 +11,7 @@ import java.util.Set;
  * @date: 2020/6/6 20:24
  * @description:
  *///用于RedisTmplate类，存入的数据类型是对象
+
 public interface RedisTmpService {
     /**
      * 保存属性

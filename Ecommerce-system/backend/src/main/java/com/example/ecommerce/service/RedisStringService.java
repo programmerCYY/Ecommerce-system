@@ -1,11 +1,14 @@
 package com.example.ecommerce.service;
 
+import org.springframework.stereotype.Service;
+
 /**
  * @author: rain
  * @date: 2020/6/6 20:24
  * @description:
  */
 //存入的数据类型为字符串
+
 public interface RedisStringService {
     /**
      * 存储数据

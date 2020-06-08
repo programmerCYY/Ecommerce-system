@@ -3,8 +3,10 @@ package com.example.ecommerce.service.impl;
 import com.example.ecommerce.common.api.CommonResult;
 import com.example.ecommerce.common.utils.JwtTokenUtil;
 import com.example.ecommerce.mbg.mapper.ShopMapper;
+import com.example.ecommerce.mbg.mapper.UserpermissionMapper;
 import com.example.ecommerce.mbg.model.Shop;
 import com.example.ecommerce.mbg.model.ShopExample;
+import com.example.ecommerce.mbg.model.Userpermission;
 import com.example.ecommerce.service.ShopService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -17,6 +19,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -29,6 +32,9 @@ public class ShopServiceImpl implements ShopService {
 
     @Autowired(required = false)
     private ShopMapper shopMapper;
+
+    @Autowired(required = false)
+    private UserpermissionMapper userpermissionMapper;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -55,15 +61,26 @@ public class ShopServiceImpl implements ShopService {
         }
 
         String text = "待填写";
+        String p=passwordEncoder.encode(password);
+
 
         Shop shop = new Shop();
         shop.setSellername(Sellername);
         shop.setRegisterstate(0);
-        shop.setSellerpassword(passwordEncoder.encode(password));
+        shop.setSellerpassword(p);
         shop.setShopaddress(text);
         shop.setShopname(Shopname);
+        shop.setTotalsales(0);
+
+        String value="普通用户";
+        Userpermission userpermission = new Userpermission();
+        userpermission.setValue(value);
+        userpermission.setName(Sellername);
+        userpermission.setCreatetime(new Date());
+        userpermission.setRole(1);
 
         shopMapper.insert(shop);
+        userpermissionMapper.insert(userpermission);
         return CommonResult.success(Sellername,"注册请求已提交，等待审核");
     }
 
@@ -82,4 +99,6 @@ public class ShopServiceImpl implements ShopService {
         }
         return token;
     }
+
+
 }
