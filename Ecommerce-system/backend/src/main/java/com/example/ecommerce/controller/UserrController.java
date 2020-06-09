@@ -19,9 +19,9 @@ import java.util.Map;
  * @date: 2020/6/1 12:04
  * @description:
  */
-@Api(tags = "UserrController",description = "普通用户的操作接口")
+@Api(tags = "UserController",description = "普通用户的操作接口")
 @Controller
-@RequestMapping("/Userr")
+@RequestMapping("/User")
 public class UserrController {
 
     @Autowired
@@ -31,7 +31,7 @@ public class UserrController {
     private String tokenHead;
 
     @ApiOperation("普通用户的注册")
-    @RequestMapping(value = "/Userrregister",method = RequestMethod.GET)
+    @RequestMapping(value = "/Userregister",method = RequestMethod.GET)
     @ResponseBody
     public CommonResult register(@RequestParam String username,
                                  @RequestParam String password,
@@ -41,13 +41,12 @@ public class UserrController {
     }
 
     @ApiOperation("普通用户登录")
-    @RequestMapping(value = "/Userrlogin",method = RequestMethod.POST)
+    @RequestMapping(value = "/Userlogin",method = RequestMethod.POST)
     @ResponseBody
     public CommonResult login(@RequestBody LoginParam loginParam,
                               BindingResult bindingResult)
     {
         String token = userrService.login(loginParam.getUsername(), loginParam.getPassword());
-        System.out.println("fff"+token);
         if(token == null)
         {
             return CommonResult.validateFailed("用户名或密码错误");

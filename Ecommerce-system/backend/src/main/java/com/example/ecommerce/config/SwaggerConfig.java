@@ -33,7 +33,9 @@ public class SwaggerConfig {
                 .select()
                 .apis(RequestHandlerSelectors.withClassAnnotation(Api.class))
                 .paths(PathSelectors.any())
-                .build();
+                .build()
+                .securitySchemes(securitySchemes())
+                .securityContexts(securityContexts());
         //jwt登录认证
 
     }
@@ -57,7 +59,9 @@ public class SwaggerConfig {
     private List<SecurityContext> securityContexts(){
         //设置需要登录认证的路径
         List<SecurityContext> result = new ArrayList<>();
-       /* result.add(getContextByPath("**"));*/
+        result.add(getContextByPath("/User/.*"));
+        result.add(getContextByPath("/Manager/.*"));
+        result.add(getContextByPath("/Shop/.*"));
         return result;
     }
 
