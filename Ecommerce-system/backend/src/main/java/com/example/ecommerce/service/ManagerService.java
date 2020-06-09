@@ -16,6 +16,18 @@ import java.util.List;
 public interface ManagerService {
     String  login(String username,String password);
 
+    List<Shop> getNeedVerifyRegister(int pageNum,int pageSize);
+    CommonResult VerifyShopRegisterSuccess(String Sellername);
+    CommonResult VerifyShopRegisterFailed(String Sellername);
+    CommonResult VerifyRegisterSendEmail(String Sellername,int num);
+
+
+    List<Goods> getNeedVerifyGoods(int pageNum,int pageSize);
+    CommonResult VerifyGoodSuccess(String Goodid);
+    CommonResult VerifyGoodFailed(String Goodid);
+    CommonResult VerifyGoodSendEmail(String Goodid,int num);
+
+
 
 
 }

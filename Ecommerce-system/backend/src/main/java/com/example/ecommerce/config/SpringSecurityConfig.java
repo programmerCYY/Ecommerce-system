@@ -110,10 +110,11 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
             if(userpermission!=null){
                 List<Userpermission> permissionList = userpermissionService.getPermissionList(userpermission.getName());
                 String password = userpermissionService.getPassword(username);
-                System.out.println("1"+password);
                 return new AdminUserDetails(userpermission,permissionList,password);
             }throw new UsernameNotFoundException("用户名或密码错误");
 
         };
     }
+
+
 }

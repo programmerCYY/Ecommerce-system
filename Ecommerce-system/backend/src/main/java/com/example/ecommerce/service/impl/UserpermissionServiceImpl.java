@@ -2,12 +2,10 @@ package com.example.ecommerce.service.impl;
 
 import com.example.ecommerce.dto.AdminUserDetails;
 import com.example.ecommerce.mbg.mapper.ManagerMapper;
+import com.example.ecommerce.mbg.mapper.ShopMapper;
 import com.example.ecommerce.mbg.mapper.UserpermissionMapper;
 import com.example.ecommerce.mbg.mapper.UserrMapper;
-import com.example.ecommerce.mbg.model.Manager;
-import com.example.ecommerce.mbg.model.ManagerExample;
-import com.example.ecommerce.mbg.model.Userpermission;
-import com.example.ecommerce.mbg.model.UserpermissionExample;
+import com.example.ecommerce.mbg.model.*;
 import com.example.ecommerce.service.ManagerService;
 import com.example.ecommerce.service.UserpermissionService;
 import org.apache.catalina.mbeans.UserMBean;
@@ -36,6 +34,9 @@ public class UserpermissionServiceImpl implements UserpermissionService {
 
     @Autowired(required = false)
     private UserpermissionMapper userpermissionMapper;
+
+    @Autowired(required = false)
+    private ShopMapper shopMapper;
 
     @Autowired(required = false)
     private UserrMapper userrMapper;
@@ -77,7 +78,11 @@ public class UserpermissionServiceImpl implements UserpermissionService {
             else if(userpermission.get(0).getRole().equals(1))
             {
                 return managerMapper.selectByPrimaryKey(userid).getAdminword();
-            }else
+            }else if(userpermission.get(0).getRole().equals(2))
+            {
+                return shopMapper.selectByPrimaryKey(userid).getSellerpassword();
+            }
+            else
             {
                 return "";
             }

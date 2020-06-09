@@ -2,12 +2,16 @@ package com.example.ecommerce.service.impl;
 
 import com.example.ecommerce.common.api.CommonResult;
 import com.example.ecommerce.common.utils.JwtTokenUtil;
+import com.example.ecommerce.dto.GoodsDetails;
+import com.example.ecommerce.mbg.mapper.GoodsMapper;
 import com.example.ecommerce.mbg.mapper.ShopMapper;
 import com.example.ecommerce.mbg.mapper.UserpermissionMapper;
+import com.example.ecommerce.mbg.model.Goods;
 import com.example.ecommerce.mbg.model.Shop;
 import com.example.ecommerce.mbg.model.ShopExample;
 import com.example.ecommerce.mbg.model.Userpermission;
 import com.example.ecommerce.service.ShopService;
+import io.swagger.annotations.ApiModelProperty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -36,8 +40,14 @@ public class ShopServiceImpl implements ShopService {
     @Autowired(required = false)
     private UserpermissionMapper userpermissionMapper;
 
+    @Autowired(required = false)
+    private GoodsMapper goodsMapper;
+
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private ShopService shopService;
 
     @Autowired
     private UserDetailsService userDetailsService;
@@ -72,15 +82,8 @@ public class ShopServiceImpl implements ShopService {
         shop.setShopname(Shopname);
         shop.setTotalsales(0);
 
-        String value="普通用户";
-        Userpermission userpermission = new Userpermission();
-        userpermission.setValue(value);
-        userpermission.setName(Sellername);
-        userpermission.setCreatetime(new Date());
-        userpermission.setRole(1);
 
         shopMapper.insert(shop);
-        userpermissionMapper.insert(userpermission);
         return CommonResult.success(Sellername,"注册请求已提交，等待审核");
     }
 
@@ -98,6 +101,38 @@ public class ShopServiceImpl implements ShopService {
         }catch (AuthenticationException e){
         }
         return token;
+    }
+
+    @Override
+    public CommonResult ApplyGoodsUp(GoodsDetails goodsDetails) {
+        Goods good = new Goods();
+
+        good.setGoodid(goodsDetails.getGoodId());
+        good.setUpdownstate(0);
+        good.setCheckstate(0);
+        good.setAllsellnumber(0);
+        good.setCategoryid(goodsDetails.getCategoryId());
+        good.setDeletestate(0);
+        good.setFrontpicture(goodsDetails.getFrontpicture());
+        good.setIntroduction(goodsDetails.getIntroduction());
+        good.setIspackage(goodsDetails.getIsPackage());
+        good.setNumber(goodsDetails.getNumber());
+        good.setShangtime(new Date());
+        good.setShopid(goodsDetails.getShopId());
+        good.setGoodname(goodsDetails.getGoodname());
+
+        goodsMapper.insert(good);
+
+        shopService.SendDelayMessage(goodsDetails.getShopId());
+
+        return CommonResult.success(goodsDetails.getGoodname(),"商品上架申请已经提交，请等待审核");
+    }
+
+    @Override
+    public void SendDelayMessage(String ShopId) {
+        Shop shop=shopMapper.selectByPrimaryKey(ShopId);
+        //给商家发超时邮件
+
     }
 
 

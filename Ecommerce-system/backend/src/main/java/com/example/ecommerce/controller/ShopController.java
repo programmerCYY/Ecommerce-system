@@ -1,16 +1,17 @@
 package com.example.ecommerce.controller;
 
 import com.example.ecommerce.common.api.CommonResult;
+import com.example.ecommerce.dto.GoodsDetails;
+import com.example.ecommerce.mbg.model.Shop;
 import com.example.ecommerce.service.ShopService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+
 
 import java.util.HashMap;
 import java.util.Map;
@@ -41,8 +42,8 @@ public class ShopController {
         return shopService.SellerRegister(username, password, Shopname);
     }
 
-    @ApiOperation("普通用户登录")
-    @RequestMapping(value = "/Userrlogin",method = RequestMethod.GET)
+    @ApiOperation("商家登录")
+    @RequestMapping(value = "/Sellerlogin",method = RequestMethod.GET)
     @ResponseBody
     public CommonResult login(@RequestParam String username,
                               @RequestParam String password)
@@ -58,4 +59,13 @@ public class ShopController {
 
         return CommonResult.success(map);
     }
+
+    @ApiOperation("商家申请上架商品")
+    @RequestMapping(value = "/ApplyGoodsOn",method = RequestMethod.POST)
+    @ResponseBody
+    public CommonResult ApplyGoodsOn(@RequestBody GoodsDetails goodsDetail, BindingResult bindingResult)
+    {
+        return shopService.ApplyGoodsUp(goodsDetail);
+    }
+
 }

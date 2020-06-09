@@ -3,11 +3,18 @@
 <mapper namespace="com.example.ecommerce.mbg.mapper.GoodsMapper">
   <resultMap id="BaseResultMap" type="com.example.ecommerce.mbg.model.Goods">
     <id column="goodID" jdbcType="VARCHAR" property="goodid" />
-    <result column="StoreID" jdbcType="VARCHAR" property="storeid" />
+    <result column="ShopID" jdbcType="VARCHAR" property="shopid" />
     <result column="Goodname" jdbcType="VARCHAR" property="goodname" />
-    <result column="Goodpictrue" jdbcType="VARCHAR" property="goodpictrue" />
+    <result column="Goodpicture" jdbcType="VARCHAR" property="goodpicture" />
     <result column="CheckState" jdbcType="INTEGER" property="checkstate" />
     <result column="number" jdbcType="INTEGER" property="number" />
+    <result column="ispackage" jdbcType="INTEGER" property="ispackage" />
+    <result column="Frontpicture" jdbcType="VARCHAR" property="frontpicture" />
+    <result column="ShangTime" jdbcType="TIMESTAMP" property="shangtime" />
+    <result column="categoryId" jdbcType="VARCHAR" property="categoryid" />
+    <result column="AllsellNumber" jdbcType="INTEGER" property="allsellnumber" />
+    <result column="DeleteState" jdbcType="INTEGER" property="deletestate" />
+    <result column="UpdownState" jdbcType="INTEGER" property="updownstate" />
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.example.ecommerce.mbg.model.Goods">
     <result column="introduction" jdbcType="LONGVARCHAR" property="introduction" />
@@ -71,7 +78,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    goodID, StoreID, Goodname, Goodpictrue, CheckState, number
+    goodID, ShopID, Goodname, Goodpicture, CheckState, number, ispackage, Frontpicture, 
+    ShangTime, categoryId, AllsellNumber, DeleteState, UpdownState
   </sql>
   <sql id="Blob_Column_List">
     introduction
@@ -125,12 +133,16 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.example.ecommerce.mbg.model.Goods">
-    insert into goods (goodID, StoreID, Goodname, 
-      Goodpictrue, CheckState, number, 
-      introduction)
-    values (#{goodid,jdbcType=VARCHAR}, #{storeid,jdbcType=VARCHAR}, #{goodname,jdbcType=VARCHAR}, 
-      #{goodpictrue,jdbcType=VARCHAR}, #{checkstate,jdbcType=INTEGER}, #{number,jdbcType=INTEGER}, 
-      #{introduction,jdbcType=LONGVARCHAR})
+    insert into goods (goodID, ShopID, Goodname, 
+      Goodpicture, CheckState, number, 
+      ispackage, Frontpicture, ShangTime, 
+      categoryId, AllsellNumber, DeleteState, 
+      UpdownState, introduction)
+    values (#{goodid,jdbcType=VARCHAR}, #{shopid,jdbcType=VARCHAR}, #{goodname,jdbcType=VARCHAR}, 
+      #{goodpicture,jdbcType=VARCHAR}, #{checkstate,jdbcType=INTEGER}, #{number,jdbcType=INTEGER}, 
+      #{ispackage,jdbcType=INTEGER}, #{frontpicture,jdbcType=VARCHAR}, #{shangtime,jdbcType=TIMESTAMP}, 
+      #{categoryid,jdbcType=VARCHAR}, #{allsellnumber,jdbcType=INTEGER}, #{deletestate,jdbcType=INTEGER}, 
+      #{updownstate,jdbcType=INTEGER}, #{introduction,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.example.ecommerce.mbg.model.Goods">
     insert into goods
@@ -138,20 +150,41 @@
       <if test="goodid != null">
         goodID,
       </if>
-      <if test="storeid != null">
-        StoreID,
+      <if test="shopid != null">
+        ShopID,
       </if>
       <if test="goodname != null">
         Goodname,
       </if>
-      <if test="goodpictrue != null">
-        Goodpictrue,
+      <if test="goodpicture != null">
+        Goodpicture,
       </if>
       <if test="checkstate != null">
         CheckState,
       </if>
       <if test="number != null">
         number,
+      </if>
+      <if test="ispackage != null">
+        ispackage,
+      </if>
+      <if test="frontpicture != null">
+        Frontpicture,
+      </if>
+      <if test="shangtime != null">
+        ShangTime,
+      </if>
+      <if test="categoryid != null">
+        categoryId,
+      </if>
+      <if test="allsellnumber != null">
+        AllsellNumber,
+      </if>
+      <if test="deletestate != null">
+        DeleteState,
+      </if>
+      <if test="updownstate != null">
+        UpdownState,
       </if>
       <if test="introduction != null">
         introduction,
@@ -161,20 +194,41 @@
       <if test="goodid != null">
         #{goodid,jdbcType=VARCHAR},
       </if>
-      <if test="storeid != null">
-        #{storeid,jdbcType=VARCHAR},
+      <if test="shopid != null">
+        #{shopid,jdbcType=VARCHAR},
       </if>
       <if test="goodname != null">
         #{goodname,jdbcType=VARCHAR},
       </if>
-      <if test="goodpictrue != null">
-        #{goodpictrue,jdbcType=VARCHAR},
+      <if test="goodpicture != null">
+        #{goodpicture,jdbcType=VARCHAR},
       </if>
       <if test="checkstate != null">
         #{checkstate,jdbcType=INTEGER},
       </if>
       <if test="number != null">
         #{number,jdbcType=INTEGER},
+      </if>
+      <if test="ispackage != null">
+        #{ispackage,jdbcType=INTEGER},
+      </if>
+      <if test="frontpicture != null">
+        #{frontpicture,jdbcType=VARCHAR},
+      </if>
+      <if test="shangtime != null">
+        #{shangtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="categoryid != null">
+        #{categoryid,jdbcType=VARCHAR},
+      </if>
+      <if test="allsellnumber != null">
+        #{allsellnumber,jdbcType=INTEGER},
+      </if>
+      <if test="deletestate != null">
+        #{deletestate,jdbcType=INTEGER},
+      </if>
+      <if test="updownstate != null">
+        #{updownstate,jdbcType=INTEGER},
       </if>
       <if test="introduction != null">
         #{introduction,jdbcType=LONGVARCHAR},
@@ -193,20 +247,41 @@
       <if test="record.goodid != null">
         goodID = #{record.goodid,jdbcType=VARCHAR},
       </if>
-      <if test="record.storeid != null">
-        StoreID = #{record.storeid,jdbcType=VARCHAR},
+      <if test="record.shopid != null">
+        ShopID = #{record.shopid,jdbcType=VARCHAR},
       </if>
       <if test="record.goodname != null">
         Goodname = #{record.goodname,jdbcType=VARCHAR},
       </if>
-      <if test="record.goodpictrue != null">
-        Goodpictrue = #{record.goodpictrue,jdbcType=VARCHAR},
+      <if test="record.goodpicture != null">
+        Goodpicture = #{record.goodpicture,jdbcType=VARCHAR},
       </if>
       <if test="record.checkstate != null">
         CheckState = #{record.checkstate,jdbcType=INTEGER},
       </if>
       <if test="record.number != null">
         number = #{record.number,jdbcType=INTEGER},
+      </if>
+      <if test="record.ispackage != null">
+        ispackage = #{record.ispackage,jdbcType=INTEGER},
+      </if>
+      <if test="record.frontpicture != null">
+        Frontpicture = #{record.frontpicture,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shangtime != null">
+        ShangTime = #{record.shangtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.categoryid != null">
+        categoryId = #{record.categoryid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.allsellnumber != null">
+        AllsellNumber = #{record.allsellnumber,jdbcType=INTEGER},
+      </if>
+      <if test="record.deletestate != null">
+        DeleteState = #{record.deletestate,jdbcType=INTEGER},
+      </if>
+      <if test="record.updownstate != null">
+        UpdownState = #{record.updownstate,jdbcType=INTEGER},
       </if>
       <if test="record.introduction != null">
         introduction = #{record.introduction,jdbcType=LONGVARCHAR},
@@ -219,11 +294,18 @@
   <update id="updateByExampleWithBLOBs" parameterType="map">
     update goods
     set goodID = #{record.goodid,jdbcType=VARCHAR},
-      StoreID = #{record.storeid,jdbcType=VARCHAR},
+      ShopID = #{record.shopid,jdbcType=VARCHAR},
       Goodname = #{record.goodname,jdbcType=VARCHAR},
-      Goodpictrue = #{record.goodpictrue,jdbcType=VARCHAR},
+      Goodpicture = #{record.goodpicture,jdbcType=VARCHAR},
       CheckState = #{record.checkstate,jdbcType=INTEGER},
       number = #{record.number,jdbcType=INTEGER},
+      ispackage = #{record.ispackage,jdbcType=INTEGER},
+      Frontpicture = #{record.frontpicture,jdbcType=VARCHAR},
+      ShangTime = #{record.shangtime,jdbcType=TIMESTAMP},
+      categoryId = #{record.categoryid,jdbcType=VARCHAR},
+      AllsellNumber = #{record.allsellnumber,jdbcType=INTEGER},
+      DeleteState = #{record.deletestate,jdbcType=INTEGER},
+      UpdownState = #{record.updownstate,jdbcType=INTEGER},
       introduction = #{record.introduction,jdbcType=LONGVARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -232,11 +314,18 @@
   <update id="updateByExample" parameterType="map">
     update goods
     set goodID = #{record.goodid,jdbcType=VARCHAR},
-      StoreID = #{record.storeid,jdbcType=VARCHAR},
+      ShopID = #{record.shopid,jdbcType=VARCHAR},
       Goodname = #{record.goodname,jdbcType=VARCHAR},
-      Goodpictrue = #{record.goodpictrue,jdbcType=VARCHAR},
+      Goodpicture = #{record.goodpicture,jdbcType=VARCHAR},
       CheckState = #{record.checkstate,jdbcType=INTEGER},
-      number = #{record.number,jdbcType=INTEGER}
+      number = #{record.number,jdbcType=INTEGER},
+      ispackage = #{record.ispackage,jdbcType=INTEGER},
+      Frontpicture = #{record.frontpicture,jdbcType=VARCHAR},
+      ShangTime = #{record.shangtime,jdbcType=TIMESTAMP},
+      categoryId = #{record.categoryid,jdbcType=VARCHAR},
+      AllsellNumber = #{record.allsellnumber,jdbcType=INTEGER},
+      DeleteState = #{record.deletestate,jdbcType=INTEGER},
+      UpdownState = #{record.updownstate,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -244,20 +333,41 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.example.ecommerce.mbg.model.Goods">
     update goods
     <set>
-      <if test="storeid != null">
-        StoreID = #{storeid,jdbcType=VARCHAR},
+      <if test="shopid != null">
+        ShopID = #{shopid,jdbcType=VARCHAR},
       </if>
       <if test="goodname != null">
         Goodname = #{goodname,jdbcType=VARCHAR},
       </if>
-      <if test="goodpictrue != null">
-        Goodpictrue = #{goodpictrue,jdbcType=VARCHAR},
+      <if test="goodpicture != null">
+        Goodpicture = #{goodpicture,jdbcType=VARCHAR},
       </if>
       <if test="checkstate != null">
         CheckState = #{checkstate,jdbcType=INTEGER},
       </if>
       <if test="number != null">
         number = #{number,jdbcType=INTEGER},
+      </if>
+      <if test="ispackage != null">
+        ispackage = #{ispackage,jdbcType=INTEGER},
+      </if>
+      <if test="frontpicture != null">
+        Frontpicture = #{frontpicture,jdbcType=VARCHAR},
+      </if>
+      <if test="shangtime != null">
+        ShangTime = #{shangtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="categoryid != null">
+        categoryId = #{categoryid,jdbcType=VARCHAR},
+      </if>
+      <if test="allsellnumber != null">
+        AllsellNumber = #{allsellnumber,jdbcType=INTEGER},
+      </if>
+      <if test="deletestate != null">
+        DeleteState = #{deletestate,jdbcType=INTEGER},
+      </if>
+      <if test="updownstate != null">
+        UpdownState = #{updownstate,jdbcType=INTEGER},
       </if>
       <if test="introduction != null">
         introduction = #{introduction,jdbcType=LONGVARCHAR},
@@ -267,21 +377,35 @@
   </update>
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.example.ecommerce.mbg.model.Goods">
     update goods
-    set StoreID = #{storeid,jdbcType=VARCHAR},
+    set ShopID = #{shopid,jdbcType=VARCHAR},
       Goodname = #{goodname,jdbcType=VARCHAR},
-      Goodpictrue = #{goodpictrue,jdbcType=VARCHAR},
+      Goodpicture = #{goodpicture,jdbcType=VARCHAR},
       CheckState = #{checkstate,jdbcType=INTEGER},
       number = #{number,jdbcType=INTEGER},
+      ispackage = #{ispackage,jdbcType=INTEGER},
+      Frontpicture = #{frontpicture,jdbcType=VARCHAR},
+      ShangTime = #{shangtime,jdbcType=TIMESTAMP},
+      categoryId = #{categoryid,jdbcType=VARCHAR},
+      AllsellNumber = #{allsellnumber,jdbcType=INTEGER},
+      DeleteState = #{deletestate,jdbcType=INTEGER},
+      UpdownState = #{updownstate,jdbcType=INTEGER},
       introduction = #{introduction,jdbcType=LONGVARCHAR}
     where goodID = #{goodid,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.example.ecommerce.mbg.model.Goods">
     update goods
-    set StoreID = #{storeid,jdbcType=VARCHAR},
+    set ShopID = #{shopid,jdbcType=VARCHAR},
       Goodname = #{goodname,jdbcType=VARCHAR},
-      Goodpictrue = #{goodpictrue,jdbcType=VARCHAR},
+      Goodpicture = #{goodpicture,jdbcType=VARCHAR},
       CheckState = #{checkstate,jdbcType=INTEGER},
-      number = #{number,jdbcType=INTEGER}
+      number = #{number,jdbcType=INTEGER},
+      ispackage = #{ispackage,jdbcType=INTEGER},
+      Frontpicture = #{frontpicture,jdbcType=VARCHAR},
+      ShangTime = #{shangtime,jdbcType=TIMESTAMP},
+      categoryId = #{categoryid,jdbcType=VARCHAR},
+      AllsellNumber = #{allsellnumber,jdbcType=INTEGER},
+      DeleteState = #{deletestate,jdbcType=INTEGER},
+      UpdownState = #{updownstate,jdbcType=INTEGER}
     where goodID = #{goodid,jdbcType=VARCHAR}
   </update>
 </mapper>

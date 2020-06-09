@@ -2,12 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.ecommerce.mbg.mapper.ShopMapper">
   <resultMap id="BaseResultMap" type="com.example.ecommerce.mbg.model.Shop">
-    <id column="SellerName" jdbcType="VARCHAR" property="sellername" />
+    <id column="ShopId" jdbcType="VARCHAR" property="shopid" />
     <result column="Shopname" jdbcType="VARCHAR" property="shopname" />
     <result column="TotalSales" jdbcType="INTEGER" property="totalsales" />
     <result column="ShopAddress" jdbcType="VARCHAR" property="shopaddress" />
     <result column="RegisterState" jdbcType="INTEGER" property="registerstate" />
     <result column="Sellerpassword" jdbcType="VARCHAR" property="sellerpassword" />
+    <result column="Sellername" jdbcType="VARCHAR" property="sellername" />
+    <result column="SellerTelephone" jdbcType="VARCHAR" property="sellertelephone" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -68,7 +70,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    SellerName, Shopname, TotalSales, ShopAddress, RegisterState, Sellerpassword
+    ShopId, Shopname, TotalSales, ShopAddress, RegisterState, Sellerpassword, Sellername, 
+    SellerTelephone
   </sql>
   <select id="selectByExample" parameterType="com.example.ecommerce.mbg.model.ShopExample" resultMap="BaseResultMap">
     select
@@ -88,11 +91,11 @@
     select 
     <include refid="Base_Column_List" />
     from shop
-    where SellerName = #{sellername,jdbcType=VARCHAR}
+    where ShopId = #{shopid,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from shop
-    where SellerName = #{sellername,jdbcType=VARCHAR}
+    where ShopId = #{shopid,jdbcType=VARCHAR}
   </delete>
   <delete id="deleteByExample" parameterType="com.example.ecommerce.mbg.model.ShopExample">
     delete from shop
@@ -101,18 +104,18 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.example.ecommerce.mbg.model.Shop">
-    insert into shop (SellerName, Shopname, TotalSales, 
-      ShopAddress, RegisterState, Sellerpassword
-      )
-    values (#{sellername,jdbcType=VARCHAR}, #{shopname,jdbcType=VARCHAR}, #{totalsales,jdbcType=INTEGER}, 
-      #{shopaddress,jdbcType=VARCHAR}, #{registerstate,jdbcType=INTEGER}, #{sellerpassword,jdbcType=VARCHAR}
-      )
+    insert into shop (ShopId, Shopname, TotalSales, 
+      ShopAddress, RegisterState, Sellerpassword, 
+      Sellername, SellerTelephone)
+    values (#{shopid,jdbcType=VARCHAR}, #{shopname,jdbcType=VARCHAR}, #{totalsales,jdbcType=INTEGER}, 
+      #{shopaddress,jdbcType=VARCHAR}, #{registerstate,jdbcType=INTEGER}, #{sellerpassword,jdbcType=VARCHAR}, 
+      #{sellername,jdbcType=VARCHAR}, #{sellertelephone,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.example.ecommerce.mbg.model.Shop">
     insert into shop
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="sellername != null">
-        SellerName,
+      <if test="shopid != null">
+        ShopId,
       </if>
       <if test="shopname != null">
         Shopname,
@@ -129,10 +132,16 @@
       <if test="sellerpassword != null">
         Sellerpassword,
       </if>
+      <if test="sellername != null">
+        Sellername,
+      </if>
+      <if test="sellertelephone != null">
+        SellerTelephone,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="sellername != null">
-        #{sellername,jdbcType=VARCHAR},
+      <if test="shopid != null">
+        #{shopid,jdbcType=VARCHAR},
       </if>
       <if test="shopname != null">
         #{shopname,jdbcType=VARCHAR},
@@ -149,6 +158,12 @@
       <if test="sellerpassword != null">
         #{sellerpassword,jdbcType=VARCHAR},
       </if>
+      <if test="sellername != null">
+        #{sellername,jdbcType=VARCHAR},
+      </if>
+      <if test="sellertelephone != null">
+        #{sellertelephone,jdbcType=VARCHAR},
+      </if>
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.example.ecommerce.mbg.model.ShopExample" resultType="java.lang.Long">
@@ -160,8 +175,8 @@
   <update id="updateByExampleSelective" parameterType="map">
     update shop
     <set>
-      <if test="record.sellername != null">
-        SellerName = #{record.sellername,jdbcType=VARCHAR},
+      <if test="record.shopid != null">
+        ShopId = #{record.shopid,jdbcType=VARCHAR},
       </if>
       <if test="record.shopname != null">
         Shopname = #{record.shopname,jdbcType=VARCHAR},
@@ -178,6 +193,12 @@
       <if test="record.sellerpassword != null">
         Sellerpassword = #{record.sellerpassword,jdbcType=VARCHAR},
       </if>
+      <if test="record.sellername != null">
+        Sellername = #{record.sellername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sellertelephone != null">
+        SellerTelephone = #{record.sellertelephone,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -185,12 +206,14 @@
   </update>
   <update id="updateByExample" parameterType="map">
     update shop
-    set SellerName = #{record.sellername,jdbcType=VARCHAR},
+    set ShopId = #{record.shopid,jdbcType=VARCHAR},
       Shopname = #{record.shopname,jdbcType=VARCHAR},
       TotalSales = #{record.totalsales,jdbcType=INTEGER},
       ShopAddress = #{record.shopaddress,jdbcType=VARCHAR},
       RegisterState = #{record.registerstate,jdbcType=INTEGER},
-      Sellerpassword = #{record.sellerpassword,jdbcType=VARCHAR}
+      Sellerpassword = #{record.sellerpassword,jdbcType=VARCHAR},
+      Sellername = #{record.sellername,jdbcType=VARCHAR},
+      SellerTelephone = #{record.sellertelephone,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -213,8 +236,14 @@
       <if test="sellerpassword != null">
         Sellerpassword = #{sellerpassword,jdbcType=VARCHAR},
       </if>
+      <if test="sellername != null">
+        Sellername = #{sellername,jdbcType=VARCHAR},
+      </if>
+      <if test="sellertelephone != null">
+        SellerTelephone = #{sellertelephone,jdbcType=VARCHAR},
+      </if>
     </set>
-    where SellerName = #{sellername,jdbcType=VARCHAR}
+    where ShopId = #{shopid,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.example.ecommerce.mbg.model.Shop">
     update shop
@@ -222,7 +251,9 @@
       TotalSales = #{totalsales,jdbcType=INTEGER},
       ShopAddress = #{shopaddress,jdbcType=VARCHAR},
       RegisterState = #{registerstate,jdbcType=INTEGER},
-      Sellerpassword = #{sellerpassword,jdbcType=VARCHAR}
-    where SellerName = #{sellername,jdbcType=VARCHAR}
+      Sellerpassword = #{sellerpassword,jdbcType=VARCHAR},
+      Sellername = #{sellername,jdbcType=VARCHAR},
+      SellerTelephone = #{sellertelephone,jdbcType=VARCHAR}
+    where ShopId = #{shopid,jdbcType=VARCHAR}
   </update>
 </mapper>

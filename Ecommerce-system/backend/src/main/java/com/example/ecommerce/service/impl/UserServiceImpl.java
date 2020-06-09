@@ -39,8 +39,6 @@ import java.util.Random;
 @Service
 public class UserServiceImpl implements UserrService {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(UserServiceImpl.class);
-
     @Autowired(required = false)
     private UserrMapper userrMapper;
 
@@ -104,7 +102,6 @@ public class UserServiceImpl implements UserrService {
             SecurityContextHolder.getContext().setAuthentication(authentication);
             token = jwtTokenUtil.generateToken(userDetails);
         } catch (AuthenticationException e) {
-            LOGGER.warn("登录异常:{}", e.getMessage());
         }
         return token;
     }
