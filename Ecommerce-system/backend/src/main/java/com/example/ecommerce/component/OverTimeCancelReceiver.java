@@ -1,7 +1,6 @@
 package com.example.ecommerce.component;
 
 import com.example.ecommerce.service.ManagerService;
-import org.apache.catalina.Manager;
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;

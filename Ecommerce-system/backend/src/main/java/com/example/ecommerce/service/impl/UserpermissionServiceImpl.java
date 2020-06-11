@@ -8,7 +8,6 @@ import com.example.ecommerce.mbg.mapper.UserrMapper;
 import com.example.ecommerce.mbg.model.*;
 import com.example.ecommerce.service.ManagerService;
 import com.example.ecommerce.service.UserpermissionService;
-import org.apache.catalina.mbeans.UserMBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.userdetails.UserDetails;

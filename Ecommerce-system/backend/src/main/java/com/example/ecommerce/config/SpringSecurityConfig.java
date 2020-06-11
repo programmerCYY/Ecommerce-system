@@ -63,10 +63,15 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/**/*.css",
                         "/**/*.js",
                         "/swagger-resources/**",
-                        "/v2/api-docs/**"
+                        "/v2/api-docs/**",
+                        "/webjars/**",
+                        "/v2/**",
+                        "/swagger-ui.html/**",
+                        "/api-docs",
+                        "/ecommerce/**"
                 )
                 .permitAll()
-                .antMatchers("/manager/login","/manager/register")// 对登录注册要允许匿名访问
+                .antMatchers("/Manager/login","/Manager/register","/User/Userregister","/User/Userlogin","/Shop/Sellerregister","/Shop/Userlogin")// 对登录注册要允许匿名访问
                 .permitAll()
                 .antMatchers(HttpMethod.OPTIONS)//跨域请求会先进行一次options请求
                 .permitAll()

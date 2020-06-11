@@ -2,7 +2,6 @@ package com.example.ecommerce.service.impl;
 
 import com.example.ecommerce.common.api.CommonResult;
 import com.example.ecommerce.common.utils.JwtTokenUtil;
-import com.example.ecommerce.dto.GoodsDetails;
 import com.example.ecommerce.mbg.mapper.GoodsMapper;
 import com.example.ecommerce.mbg.mapper.ShopMapper;
 import com.example.ecommerce.mbg.mapper.UserpermissionMapper;
@@ -104,28 +103,29 @@ public class ShopServiceImpl implements ShopService {
     }
 
     @Override
-    public CommonResult ApplyGoodsUp(GoodsDetails goodsDetails) {
+    public CommonResult ApplyGoodsUp(String GoodId, String ShopId, String Goodname, String Goodpicture, String introduction, int number, int isPackage, String Frontpicture, String categoryId) {
         Goods good = new Goods();
 
-        good.setGoodid(goodsDetails.getGoodId());
+        good.setGoodid(GoodId);
         good.setUpdownstate(0);
         good.setCheckstate(0);
         good.setAllsellnumber(0);
-        good.setCategoryid(goodsDetails.getCategoryId());
+        good.setCategoryid(categoryId);
         good.setDeletestate(0);
-        good.setFrontpicture(goodsDetails.getFrontpicture());
-        good.setIntroduction(goodsDetails.getIntroduction());
-        good.setIspackage(goodsDetails.getIsPackage());
-        good.setNumber(goodsDetails.getNumber());
+        good.setGoodpicture(Goodpicture);
+        good.setFrontpicture(Frontpicture);
+        good.setIntroduction(introduction);
+        good.setIspackage(isPackage);
+        good.setNumber(number);
         good.setShangtime(new Date());
-        good.setShopid(goodsDetails.getShopId());
-        good.setGoodname(goodsDetails.getGoodname());
+        good.setShopid(ShopId);
+        good.setGoodname(Goodname);
 
         goodsMapper.insert(good);
 
-        shopService.SendDelayMessage(goodsDetails.getShopId());
+        shopService.SendDelayMessage(ShopId);
 
-        return CommonResult.success(goodsDetails.getGoodname(),"商品上架申请已经提交，请等待审核");
+        return CommonResult.success(Goodname,"商品上架申请已经提交，请等待审核");
     }
 
     @Override

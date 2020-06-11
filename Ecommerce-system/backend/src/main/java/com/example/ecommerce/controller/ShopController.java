@@ -1,7 +1,6 @@
 package com.example.ecommerce.controller;
 
 import com.example.ecommerce.common.api.CommonResult;
-import com.example.ecommerce.dto.GoodsDetails;
 import com.example.ecommerce.mbg.model.Shop;
 import com.example.ecommerce.service.ShopService;
 import io.swagger.annotations.Api;
@@ -61,11 +60,19 @@ public class ShopController {
     }
 
     @ApiOperation("商家申请上架商品")
-    @RequestMapping(value = "/ApplyGoodsOn",method = RequestMethod.POST)
+    @RequestMapping(value = "/ApplyGoodsOn",method = RequestMethod.GET)
     @ResponseBody
-    public CommonResult ApplyGoodsOn(@RequestBody GoodsDetails goodsDetail, BindingResult bindingResult)
+    public CommonResult ApplyGoodsOn(@RequestParam String GoodId,
+                                     @RequestParam String ShopId,
+                                     @RequestParam String Goodname,
+                                     @RequestParam String Goodpicture,
+                                     @RequestParam String introduction,
+                                     @RequestParam int number,
+                                     @RequestParam int isPackage,
+                                     @RequestParam String Frontpicture,
+                                     @RequestParam String categoryId)
     {
-        return shopService.ApplyGoodsUp(goodsDetail);
+        return shopService.ApplyGoodsUp(GoodId, ShopId, Goodname, Goodpicture, introduction, number, isPackage, Frontpicture, categoryId);
     }
 
 }

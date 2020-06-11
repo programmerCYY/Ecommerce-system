@@ -1,7 +1,6 @@
 package com.example.ecommerce.service;
 
 import com.example.ecommerce.common.api.CommonResult;
-import com.example.ecommerce.dto.GoodsDetails;
 import com.example.ecommerce.mbg.model.GoodSku;
 import com.example.ecommerce.mbg.model.Goods;
 import com.example.ecommerce.mbg.model.Order;
@@ -25,7 +24,7 @@ public interface ShopService {
     String SellerLogin(String Sellername,String Sellerpassword);
 
     @Transactional
-    CommonResult ApplyGoodsUp(GoodsDetails goodsDetails);
+    CommonResult ApplyGoodsUp(String GoodId, String ShopId, String Goodname, String Goodpicture, String introduction, int number, int isPackage, String Frontpicture, String categoryId);
 
     void SendDelayMessage(String ShopId);
 }
