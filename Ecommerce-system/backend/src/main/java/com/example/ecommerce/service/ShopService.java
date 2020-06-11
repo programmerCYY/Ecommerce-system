@@ -19,7 +19,7 @@ import java.util.List;
 public interface ShopService {
 
     @Transactional
-    CommonResult SellerRegister(String Sellername, String password,String Shopname);
+    CommonResult SellerRegister(String Sellername, String password,String Shopname,String address);
 
     String SellerLogin(String Sellername,String Sellerpassword);
 

@@ -60,7 +60,7 @@ public class ShopServiceImpl implements ShopService {
 
 
     @Override
-    public CommonResult SellerRegister(String Sellername, String password,String Shopname) {
+    public CommonResult SellerRegister(String Sellername, String password,String Shopname,String address) {
         ShopExample shopExample = new ShopExample();
         shopExample.createCriteria().andSellernameEqualTo(Sellername);
         List<Shop> shopList = shopMapper.selectByExample(shopExample);
@@ -69,7 +69,6 @@ public class ShopServiceImpl implements ShopService {
             return CommonResult.failed("用户名已经注册");
         }
 
-        String text = "待填写";
         String p=passwordEncoder.encode(password);
 
 
@@ -77,7 +76,7 @@ public class ShopServiceImpl implements ShopService {
         shop.setSellername(Sellername);
         shop.setRegisterstate(0);
         shop.setSellerpassword(p);
-        shop.setShopaddress(text);
+        shop.setShopaddress(address);
         shop.setShopname(Shopname);
         shop.setTotalsales(0);
 
