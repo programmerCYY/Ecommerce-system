@@ -37,9 +37,11 @@ public class ShopController {
     public CommonResult register(@RequestParam String ShopId,
                                  @RequestParam String password,
                                  @RequestParam String Shopname,
-                                 @RequestParam String address)
+                                 @RequestParam String Sellername,
+                                 @RequestParam String address,
+                                 @RequestParam String sellertelephone)
     {
-        return shopService.SellerRegister(ShopId, password, Shopname,address);
+        return shopService.SellerRegister(ShopId, password, Shopname,Sellername,address,sellertelephone);
     }
 
     @ApiOperation("商家登录")

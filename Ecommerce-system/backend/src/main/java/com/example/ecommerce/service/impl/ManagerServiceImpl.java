@@ -93,7 +93,7 @@ public class ManagerServiceImpl implements ManagerService {
         userpermission.setValue(value);
         userpermission.setName(Sellername);
         userpermission.setCreatetime(new Date());
-        userpermission.setRole(1);
+        userpermission.setRole(2);
 
         userpermissionMapper.insert(userpermission);
         shopMapper.updateByPrimaryKey(shop);

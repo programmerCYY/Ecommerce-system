@@ -60,7 +60,7 @@ public class ShopServiceImpl implements ShopService {
 
 
     @Override
-    public CommonResult SellerRegister(String Sellername, String password,String Shopname,String address) {
+    public CommonResult SellerRegister(String ShopId, String password, String Shopname,String Sellername,String address,String sellertelephone) {
         ShopExample shopExample = new ShopExample();
         shopExample.createCriteria().andSellernameEqualTo(Sellername);
         List<Shop> shopList = shopMapper.selectByExample(shopExample);
@@ -79,7 +79,10 @@ public class ShopServiceImpl implements ShopService {
         shop.setShopaddress(address);
         shop.setShopname(Shopname);
         shop.setTotalsales(0);
+        shop.setShopid(ShopId);
+        shop.setSellertelephone(sellertelephone);
 
+        System.out.println(shop);
 
         shopMapper.insert(shop);
         return CommonResult.success(Sellername,"注册请求已提交，等待审核");
