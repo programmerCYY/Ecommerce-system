@@ -1,0 +1,14 @@
+<!--miniprogram/pages/admin/admin.wxml-->
+<view class="admin_main">
+  <text class="iconfont icon-shangpinguanlix">商品管理</text>
+  <text class="iconfont icon-shangjiaguanli">商家管理</text>
+</view>
+<view class="admin_main">
+  <view class="goods">
+    <button style="width:80%" class="btn" bindtap="addgood">商品上架审核</button>
+    <button style="width:80%" class="btn" bindtap="degood">商品下架</button>
+  </view>
+  <view class="seller">
+    <button style="width:80%" class="btn" bindtap="sellermanagement">商家申请审核</button>
+  </view>
+</view>

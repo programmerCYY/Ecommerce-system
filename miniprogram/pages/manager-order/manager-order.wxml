@@ -30,3 +30,4 @@
     <view class="state" wx:else></view>
   </view>
 </view>
+

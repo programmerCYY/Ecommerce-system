@@ -1,0 +1,20 @@
+/* miniprogram/pages/admin/admin.wxss */
+.admin_main{
+  display: flex;
+  justify-content: space-around;
+}
+
+.admin_main .goods{
+  flex: 5;
+}
+
+.admin_main .seller{
+  flex: 5;
+}
+
+.btn{
+  width: 20rpx;
+  background-color:burlywood;
+  color:white;
+  margin-top: 25rpx;
+}

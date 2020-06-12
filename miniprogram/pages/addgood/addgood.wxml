@@ -1,0 +1,22 @@
+<!--miniprogram/pages/goodmanagement/goodmanagement.wxml-->
+<!--miniprogram/pages/order/order.wxml-->
+<view class="order_main">
+  <view wx:for="{{up_goods}}" wx:key="goodID" class="order_item">
+    <view class="order_no_row">
+      <view class="order_no_text">商品编号</view>
+      <view class="order_no_value">{{item.goodID}}</view>
+    </view>
+    <view class="order_name_row">
+    <view class="order_name_text">商品名</view>
+      <view class="order_name_value">{{item.goodname}}</view>
+    </view>
+    <view class="order_desc_row">
+    <view class="order_desc_text">商品描述</view>
+      <view class="order_desc_value">{{item.describe}}</view>
+    </view>
+    <view>
+      <button style="width:80%" class="ybtn">允许上架</button>
+      <button style="width:80%" class="nbtn">拒绝上架</button>
+    </view>
+  </view>
+</view>

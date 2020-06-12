@@ -23,53 +23,55 @@
   </view>
   <!--商品信息-->
 
+
   <view class="address">
     <view class="iconfont iconmap"></view>
-    <view wx:for="{{detailInfo.Address}}" wx:key="*this">{{item}}</view>
+    <view>{{detailInfo.Address}}</view>
   </view>
   <!--商家地址-->
 
+
   <block class="choose-line">
-  <view class="commodity_attr_list">
-  <!--每组属性-->
-  <view class="attr_box" wx:for="{{attrValueList}}" wx:key="*this" wx:for-item="attrValueObj" wx:for-index="attrIndex">
-    <!--属性名-->
-    <view class="attr_name">{{attrValueObj.attrKey}}</view>
-    <!--属性值-->
-    <view class="attr_value_box">
-      <!--每个属性值-->
-      <view class="attr_value {{attrIndex==firstIndex || attrValueObj.attrValueStatus[valueIndex]?(value==attrValueObj.selectedValue?'attr_value_active':''):'attr_value_disabled'}}" bindtap="selectAttrValue" data-status="{{attrValueObj.attrValueStatus[valueIndex]}}"
-        data-value="{{value}}" data-key="{{attrValueObj.attrKey}}" data-index="{{attrIndex}}" data-selectedvalue="{{attrValueObj.selectedValue}}" wx:for="{{attrValueObj.attrValues}}" wx:key="*this"  wx:for-item="value" wx:for-index="valueIndex">{{value}}</view>
+    <view class="commodity_attr_list">
+      <!--每组属性-->
+      <view class="attr_box" wx:for="{{attrValueList}}" wx:for-item="attrValueObj" wx:for-index="attrIndex">
+        <!--属性名-->
+        <view class="attr_name">{{attrValueObj.attrKey}}</view>
+        <!--属性值-->
+        <view class="attr_value_box">
+          <!--每个属性值-->
+          <view class="attr_value {{attrIndex==firstIndex || attrValueObj.attrValueStatus[valueIndex]?(value==attrValueObj.selectedValue?'attr_value_active':''):'attr_value_disabled'}}" bindtap="selectAttrValue" data-status="{{attrValueObj.attrValueStatus[valueIndex]}}"
+            data-value="{{value}}" data-key="{{attrValueObj.attrKey}}" data-index="{{attrIndex}}" data-selectedvalue="{{attrValueObj.selectedValue}}" wx:for="{{attrValueObj.attrValues}}" wx:for-item="value" wx:for-index="valueIndex">{{value}}</view>
+        </view>
+      </view>
     </view>
-  </view>
-  </view>
   </block>
   <!--联动选择-->
 
 
   <view class="detail-box">
-  <block wx:for="{{detailInfo.DetailImgList}}" wx:key="*this">
-   <image mode="widthFix" src="{{item}}"></image>
-  </block>
+    <block wx:for="{{detailInfo.DetailImgList}}" wx:key="*this">
+      <image mode="widthFix" src="{{item}}"></image>
+    </block>
   </view>
   <!--商品介绍-->
 
   <view class="bottom-nav">
     <view class="daohan" bindtap="jumptohome">
       <view class="iconfont iconhome"></view>
-        <view>首页</view>
-      </view>
+      <view>首页</view>
+    </view>
 
-      <view class="daohan" bindtap="choose">
+    <view class="daohan" bindtap="choose">
       <view class="iconfont iconxuanze"></view>
-        <view>选择</view>
-      </view>
+      <view>选择</view>
+    </view>
 
-      <view class="daohan" bindtap="jumptocart">
+    <view class="daohan" bindtap="jumptocart">
       <view class="iconfont icongouwuche"></view>
-        <view>购物车</view>
-      </view>
-      
+      <view>购物车</view>
+    </view>
+
     <view class="addcard" bindtap="addtocart">加入购物车</view>
   </view>
   <!--底部导航-->

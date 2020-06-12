@@ -1,0 +1,47 @@
+/* miniprogram/pages/goodmanagement/goodmanagement.wxss */
+/* miniprogram/pages/order/order.wxss */
+.order_main{
+  font-size: 30rpx;
+}
+
+.order_main .order_item{
+  padding:20rpx;
+  border-bottom: 1rpx solid #ccc;
+  color: #666;
+}
+
+.order_main .order_item .order_no_row{
+  display: flex;
+  padding: 10rpx 0;
+  justify-content: space-between;
+}
+
+.order_main .order_item .order_name_row{
+  display: flex;
+  padding: 10rpx 0;
+  justify-content: space-between;
+}
+
+.order_main .order_item .order_name_row .order_name_value{
+  color: red;
+  font-size: 32rpx;
+}
+.order_main .order_item .order_desc_row{
+  display: flex;
+  padding: 10rpx 0;
+  justify-content: space-between;
+}
+
+.ybtn{
+  width: 20rpx;
+  background-color:rgb(19, 169, 19);
+  color:white;
+  margin-top: 25rpx;
+}
+
+.nbtn{
+  width: 20rpx;
+  background-color:rgb(198, 0, 0);
+  color:white;
+  margin-top: 25rpx;
+}

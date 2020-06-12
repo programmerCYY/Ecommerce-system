@@ -77,8 +77,9 @@ Page({
     autoplay: true,
     interval: 2000,
     duration: 500,
-    current:0,
-    goodsNo:"",/*用来接收首页传来的goodno*/ 
+    current: 0,
+    goodsNo: "",/*用来接收首页传来的goodno*/
+    Address: "这是一个商品地址",
     detailInfo: {
       "Id": 44,
       "ShopId": 2,
@@ -86,10 +87,10 @@ Page({
       "DataStatus": 2,
       "Title": "进口|日本michinoku|北海道红鲑鱼干80g",
       "Classify": 500,
-      "Address":"这是一个商品地址",
+      "Address": "这是一个商品地址",
       "ClassifyName": "零食",
       "GoodsImage":
-      "https://www.maohz.com/mhzapi/api/Common/ImageFile/goodsimgderek20181105023005889114.jpg",
+        "https://www.maohz.com/mhzapi/api/Common/ImageFile/goodsimgderek20181105023005889114.jpg",
       "Stock": 10,
       "SaleAmount": 88,
       "CreateDate": "2018-11-04T18:30:07.000Z",
@@ -114,15 +115,15 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
-    
+  onLoad: function (options) {
+
     console.log(options)
     this.data.goodsNo = options.goodno;
     this.getdata();
   },
   //获取数据接口
-  getdata:function(){
-    let self=this;
+  getdata: function () {
+    let self = this;
     wx.request({
       url: 'https://ys.lumingx.com/api/miniapps/getWXGoodsInfo', //仅为示例，并非真实的接口地址
       data: {
@@ -133,10 +134,10 @@ Page({
       },
       success(res) {
         console.log(res.data)
-        let result=res.data;
-        if(result && result.data){
+        let result = res.data;
+        if (result && result.data) {
           self.setData({
-            detailInfo:result.data
+            detailInfo: result.data
           })
         }
       },
@@ -144,23 +145,23 @@ Page({
   },
 
   //切换事件,设置当前切换时候的底部坐标
-  swiperchange: function(e){
+  swiperchange: function (e) {
     let currentnum = e.detail.current;
     this.setData({ current: currentnum })
   },
 
   //跳转回首页
-  jumptohome:function(){
+  jumptohome: function () {
     wx.switchTab({
       url: '/pages/base/base',
     })//跳转到tabbar页面并关闭其他页面
   },
   //出现选择界面,目前不会实现
-  choose:function(){
+  choose: function () {
     console.log("我不会")
   },
   //跳到购物车界面
-  jumptocart:function(){
+  jumptocart: function () {
     wx.switchTab({
       url: '/pages/cart/cart',
     })
@@ -188,7 +189,7 @@ Page({
       },
       fail: function (res) {
         console.log(加入失败)
-       },
+      },
       complete: function (res) { },
     }),
       wx.showToast({

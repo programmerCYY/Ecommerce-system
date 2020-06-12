@@ -1,5 +1,3 @@
-/* pages/good-detail/good-detail.wxss */
-
 .swiper-box {
   position: relative;
 }
@@ -138,4 +136,4 @@
 /*禁用属性*/
 .attr_value_disabled { 
  color: #ccc; 
-} 
+}

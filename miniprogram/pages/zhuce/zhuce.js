@@ -15,6 +15,7 @@ Page({
   },
   PasswordInput: function (e) {
     this.setData({ password: e.detail.value })
+
   },
   telephoneInput: function (e) {
     this.setData({ telephone: e.detail.value })
@@ -48,6 +49,7 @@ Page({
     
   },
 
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -56,6 +58,7 @@ Page({
   },
 
   /**
+<<<<<<< HEAD
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
@@ -66,10 +69,10 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-    
   },
 
   /**
+<<<<<<< HEAD
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
@@ -90,9 +93,7 @@ Page({
     
   },
 
-  /**
-   * 用户点击右上角分享
-   */
+
   onShareAppMessage: function () {
     
   }

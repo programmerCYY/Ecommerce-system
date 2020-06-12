@@ -11,7 +11,12 @@
     "pages/good-change/good-change",
     "pages/manager-order/manager-order",
     "pages/order/order",
-    "pages/sellerzhuce/sellerzhuce"
+    "pages/sellerzhuce/sellerzhuce",
+    "pages/pay/pay",
+    "pages/admin/admin",
+    "pages/addgood/addgood",
+    "pages/sellermanagement/sellermanagement",
+    "pages/degood/degood"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
@@ -48,7 +53,7 @@
         "iconPath": "images/btn-tabs_06.png",
         "selectedIconPath": "images/btn-tabs_10.png"
       }
-      ]
+    ]
   },
   "usingComponents": {
     "i-button": "dist/button/index"
