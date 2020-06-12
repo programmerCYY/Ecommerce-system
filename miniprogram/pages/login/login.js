@@ -4,38 +4,54 @@ Page({
    * 页面的初始数据
    */
   data: {
-    account:'',
-    password:'',
+    username:'',
+    password:''
   },
   AccountInput:function(e){
-    this.setData({ account:e.detail.value})
+    this.setData({ username:e.detail.value})
   },
   PasswordInput:function(e){
     this.setData({password:e.detail.value})
   },
   onClickSubmit:function(){
-    if(this.data.account=='aaa'&&this.data.password=='sss'){
-      wx.showToast({
-      title: '登录成功',
-      icon: 'success',
-      duration: 2000//持续的时间
-      })
-      wx.navigateBack({
-        delta: 1
-      })
-    }
-    else
-      wx.showToast({
-      title: '账号或密码错误',
-      icon: 'none',
-      duration: 2000//持续的时间
-      })
+    wx.setStorage({
+      key: "userid",
+      data: this.data.username
+    })
+    wx.request({
+      url: 'http://47.105.66.104:8080/ecommerce/User/Userlogin',
+      data: {
+        username: this.data.username,
+        password: this.data.password
+      },
+      method: 'POST',
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success(res) {
+        if (res.data.code==200){
+          wx.showToast({
+            title: '登陆成功',
+            icon: 'success',
+          });
+          wx.navigateBack({
+            delta:1
+          })
+        }
+        else
+          wx.showToast({
+            title: '账号密码错误',
+            icon: 'success',
+          });
+        console.log(res.data)
+      }
+    })
   },
   /**
    * 生命周期函数--监听页面加载
    */
+
   onLoad: function (options) {
-    
   },
 
   /**

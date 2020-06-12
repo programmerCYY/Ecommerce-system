@@ -72,9 +72,6 @@ Page({
     ],
     attrValueList: [],
 
-
-
-
     indicatorDots: false,
     vertical: false,
     autoplay: true,
@@ -171,6 +168,12 @@ Page({
 
   //加入购物车
   addtocart: function () {
+    wx.getStorage({
+      key: 'userid',
+      success(res) {
+        console.log(res.data)
+      }
+    })
     let self = this;
     wx.request({
       url: 'https://ys.lumingx.com/api/miniapps/addCart',

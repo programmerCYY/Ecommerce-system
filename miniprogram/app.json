@@ -10,8 +10,8 @@
     "pages/delete-good/delete-good",
     "pages/good-change/good-change",
     "pages/manager-order/manager-order",
-    "pages/dingdan",
-    "pages/order/order"
+    "pages/order/order",
+    "pages/sellerzhuce/sellerzhuce"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",

@@ -1,2 +1,32 @@
 <!--pages/manager-order/manager-order.wxml-->
-<text>pages/manager-order/manager-order.wxml</text>
+<view class="order_main">
+  <view wx:for="{{orders}}" wx:key="order_id" class="order_item" data-id="{{item.order_id}}">
+    <view class="order_no_row">
+      <view class="order_no_text">订单编号</view>
+      <view class="order_no_value">{{item.order_number}}</view>
+    </view>
+
+    <view class="order_price_row">
+    <view class="order_price_text">订单价格</view>
+      <view class="order_price_value">￥{{item.order_price}}</view>
+    </view>
+
+    <view class="order_time_row">
+    <view class="order_time_text">订单时间</view>
+      <view class="order_time_value">{{item.order_date}}</view>
+    </view>
+
+      <view class="order_state_row">
+    <view class="order_state_text">订单状态</view>
+      <view class="order_state_value" wx:if="{{item.state==0}}">待发货</view>
+      <view class="order_state_value" wx:elif="{{item.state==1}}">已发货</view>
+      <view class="order_state_value" wx:elif="{{item.state==2}}">已收货</view>
+      <view class="order_state_value" wx:elif="{{item.state==3}}">待退货</view>
+      <view class="order_state_value" wx:elif="{{item.state==4}}">已退货</view>
+    </view>
+
+    <view class="state" bindtap="waitsent" wx:if="{{item.state==0}}">发货</view>
+    <view class="state" bindtap="waitreturn" wx:elif="{{item.state==3}}">退货</view>
+    <view class="state" wx:else></view>
+  </view>
+</view>

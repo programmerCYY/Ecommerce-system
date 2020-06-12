@@ -4,9 +4,43 @@ Page({
   /**
    * 页面的初始数据
    */
-  data: {
-    
-  },
+    data: {
+      orders: [{
+        order_id: 1,
+        order_number: 1919191,
+        order_price: 100,
+        order_date: "2020.6.7",
+        state:0,
+      },
+        {
+          order_id: 1,
+          order_number: 1919191,
+          order_price: 100,
+          order_date: "2020.6.7",
+          state: 1,
+        },
+        {
+          order_id: 1,
+          order_number: 1919191,
+          order_price: 100,
+          order_date: "2020.6.7",
+          state: 2,
+        },
+        {
+          order_id: 1,
+          order_number: 1919191,
+          order_price: 100,
+          order_date: "2020.6.7",
+          state: 3,
+        },
+        {
+          order_id: 1,
+          order_number: 1919191,
+          order_price: 100,
+          order_date: "2020.6.7",
+          state: 4,
+        }]
+    },
 
   /**
    * 生命周期函数--监听页面加载

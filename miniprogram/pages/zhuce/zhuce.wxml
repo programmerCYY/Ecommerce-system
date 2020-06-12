@@ -8,12 +8,17 @@
 <view class="form">
   <view class="row-group">
     <text>账号</text>
-    <input placeholder="请填写手机账号" placeholder-class='txt' maxlength='11' value="{{account}}" bindinput="AccountInput" />
+    <input placeholder="请填写邮箱账号" placeholder-class='txt' maxlength='20' value="{{account}}" bindinput="AccountInput" />
   </view>
 
    <view class="row-group">
     <text>密码</text>
-    <input placeholder="请填写密码" placeholder-class='txt' maxlength='11' value="{{password}}" bindinput="PasswordInput" />
+    <input placeholder="请填写密码" placeholder-class='txt' maxlength='20' value="{{password}}" bindinput="PasswordInput" />
+  </view>
+
+       <view class="row-group">
+    <text>电话</text>
+    <input placeholder="请输入电话" placeholder-class='txt' maxlength='20' value="{{telephone}}" bindinput="telephoneInput" />
   </view>
 
   <view>

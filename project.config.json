@@ -76,8 +76,6 @@
 				},
 				{
 					"id": -1,
-					"name": "商家",
-					"pathName": "pages/seller/seller",
 					"name": "详情",
 					"pathName": "pages/good-detail/good-detail",
 					"query": "",
@@ -85,11 +83,15 @@
 				},
 				{
 					"id": -1,
-					"name": "pages/delete-good/delete-good",
-					"pathName": "pages/delete-good/delete-good",
-					"query": "",
 					"name": "order",
 					"pathName": "pages/order/order",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "商家",
+					"pathName": "pages/sellerlogin/sellerlogin",
 					"scene": null
 				}
 			]

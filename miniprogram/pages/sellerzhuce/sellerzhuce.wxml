@@ -1,0 +1,37 @@
+<!--pages/sellerzhuce/sellerzhuce.wxml-->
+<view class="form">
+  <view class="row-group">
+    <text>账号</text>
+    <input placeholder="请填写商家账号" placeholder-class='txt' maxlength='20' value="{{account}}" bindinput="AccountInput" />
+  </view>
+
+  <view class="row-group">
+    <text>密码</text>
+    <input placeholder="请填写密码" placeholder-class='txt' maxlength='20' value="{{password}}" bindinput="PasswordInput" />
+  </view>
+
+  <view class="row-group">
+    <text>店名</text>
+    <input placeholder="请输入你的店名" placeholder-class='txt' maxlength='20' value="{{shopname}}" bindinput="ShopnameInput" />
+    </view>
+
+  <view class="row-group">
+    <text>商家名字</text>
+    <input placeholder="请输入你的名字" placeholder-class='txt' maxlength='20' value="{{sellername}}" bindinput="SellernameInput" />
+    </view>
+
+
+    <view class="row-group">
+    <text>地址</text>
+    <input placeholder="请输入你的地址" placeholder-class='txt' maxlength='20' value="{{address}}" bindinput="AddressInput" />
+    </view>
+
+  <view class="row-group">
+    <text>电话号</text>
+    <input placeholder="请输入你的手机号" placeholder-class='txt' maxlength='20' value="{{telephone}}" bindinput="TelephoneInput" />
+    </view>
+
+    <view>
+      <button class="submit" open-type="getUserInfo" bindtap="onClickzhuce">注册</button>
+    </view>
+  </view>

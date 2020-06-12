@@ -1,12 +1,4 @@
-/* pages/sellerlogin/sellerlogin.wxss */
-.login{
-  padding: 50rpx 20rpx;
-}
-
-.nothing{
-  margin-top: 200rpx;
-}
-
+/* pages/sellerzhuce/sellerzhuce.wxss */
 .form{
   padding: 40rpx;
 }
@@ -34,6 +26,7 @@
   right: 0;
   bottom: 26rpx;
   z-index: 2;
+
   width: 206rpx;
   height: 60rpx;
   border: 2rpx solid #00c8b6;
@@ -44,4 +37,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.form .submit{
+  margin-top: 80rpx;
+  color: #fff;
+  border: 2rpx solid #00c8b6;
+  background-color: #06ad56;
+  font-size: 36rpx;
+  font-weight: bold;
 }
