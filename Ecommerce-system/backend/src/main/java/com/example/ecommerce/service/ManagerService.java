@@ -19,15 +19,13 @@ public interface ManagerService {
     List<Shop> getNeedVerifyRegister(int pageNum,int pageSize);
     CommonResult VerifyShopRegisterSuccess(String Sellername);
     CommonResult VerifyShopRegisterFailed(String Sellername);
-    CommonResult VerifyRegisterSendEmail(String Sellername,int num);
+    CommonResult VerifyRegisterSendEmail(String Sellername,String num);
 
 
     List<Goods> getNeedVerifyGoods(int pageNum,int pageSize);
     CommonResult VerifyGoodSuccess(String Goodid);
     CommonResult VerifyGoodFailed(String Goodid);
-    CommonResult VerifyGoodSendEmail(String Goodid,int num);
+    CommonResult VerifyGoodSendEmail(String Goodid,String num);
 
-
-
-
+    CommonResult sendEmail(String emailAddress,String message);
 }

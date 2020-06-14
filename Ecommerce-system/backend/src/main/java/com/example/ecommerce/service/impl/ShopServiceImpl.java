@@ -2,6 +2,9 @@ package com.example.ecommerce.service.impl;
 
 import com.example.ecommerce.common.api.CommonResult;
 import com.example.ecommerce.common.utils.JwtTokenUtil;
+import com.example.ecommerce.common.utils.TranslateToToken;
+import com.example.ecommerce.component.OverTimeCancelSender;
+import com.example.ecommerce.component.ShopRegisterSender;
 import com.example.ecommerce.mbg.mapper.GoodsMapper;
 import com.example.ecommerce.mbg.mapper.ShopMapper;
 import com.example.ecommerce.mbg.mapper.UserpermissionMapper;
@@ -9,6 +12,7 @@ import com.example.ecommerce.mbg.model.Goods;
 import com.example.ecommerce.mbg.model.Shop;
 import com.example.ecommerce.mbg.model.ShopExample;
 import com.example.ecommerce.mbg.model.Userpermission;
+import com.example.ecommerce.service.ManagerService;
 import com.example.ecommerce.service.ShopService;
 import io.swagger.annotations.ApiModelProperty;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,6 +53,9 @@ public class ShopServiceImpl implements ShopService {
     private ShopService shopService;
 
     @Autowired
+    private ManagerService managerService;
+
+    @Autowired
     private UserDetailsService userDetailsService;
 
     @Value("${jwt.tokenHead}")
@@ -57,10 +64,12 @@ public class ShopServiceImpl implements ShopService {
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
 
+    @Autowired
+    private OverTimeCancelSender overTimeCancelSender;
 
 
     @Override
-    public CommonResult SellerRegister(String ShopId, String password, String Shopname,String Sellername,String address,String sellertelephone) {
+    public CommonResult SellerRegister(String password, String Shopname,String Sellername,String address,String sellertelephone) {
         ShopExample shopExample = new ShopExample();
         shopExample.createCriteria().andSellernameEqualTo(Sellername);
         List<Shop> shopList = shopMapper.selectByExample(shopExample);
@@ -70,7 +79,7 @@ public class ShopServiceImpl implements ShopService {
         }
 
         String p=passwordEncoder.encode(password);
-
+        String ShopId = TranslateToToken.GetGUID();
 
         Shop shop = new Shop();
         shop.setSellername(Sellername);
@@ -82,9 +91,10 @@ public class ShopServiceImpl implements ShopService {
         shop.setShopid(ShopId);
         shop.setSellertelephone(sellertelephone);
 
-        System.out.println(shop);
 
         shopMapper.insert(shop);
+
+        shopService.SendDelayMessageOverTime(ShopId);
         return CommonResult.success(Sellername,"注册请求已提交，等待审核");
     }
 
@@ -105,9 +115,14 @@ public class ShopServiceImpl implements ShopService {
     }
 
     @Override
-    public CommonResult ApplyGoodsUp(String GoodId, String ShopId, String Goodname, String Goodpicture, String introduction, int number, int isPackage, String Frontpicture, String categoryId) {
-        Goods good = new Goods();
+    public CommonResult ApplyGoodsUp(String ShopId,String Goodname, String Goodpicture, String introduction, int number, int isPackage, String Frontpicture, String categoryId) {
+        if(ShopId.length()==0)
+        {
+            return CommonResult.failed("商家ID不能为空啊");
+        }
 
+        String GoodId = TranslateToToken.GetGUID();
+        Goods good = new Goods();
         good.setGoodid(GoodId);
         good.setUpdownstate(0);
         good.setCheckstate(0);
@@ -125,17 +140,28 @@ public class ShopServiceImpl implements ShopService {
 
         goodsMapper.insert(good);
 
-        shopService.SendDelayMessage(ShopId);
 
-        return CommonResult.success(Goodname,"商品上架申请已经提交，请等待审核");
+        return CommonResult.success(Goodname,"商品上架申请已经提交，请等待12h审核");
     }
 
     @Override
-    public void SendDelayMessage(String ShopId) {
-        Shop shop=shopMapper.selectByPrimaryKey(ShopId);
-        //给商家发超时邮件
-
+    public void SendDelayMessageOverTime(String ShopId) {
+        long delaytimes = 60*60*1000*12;
+       overTimeCancelSender.sendMessage(ShopId,delaytimes);
     }
 
+    @Override
+    public CommonResult CancelRegister(String ShopId) {
+        if(shopMapper.selectByPrimaryKey(ShopId)!=null) {
+            if (shopMapper.selectByPrimaryKey(ShopId).getRegisterstate() != 0) {
+                return CommonResult.success("该商家的注册已被审核，可直接登陆");
+            }
+            managerService.sendEmail(ShopId, "超时未审核，请重新注册");
+            shopMapper.deleteByPrimaryKey(ShopId);
+            return CommonResult.success("成功删除");
+        }else{
+              return CommonResult.success("该账号不存在");
+            }
+        }
 
 }

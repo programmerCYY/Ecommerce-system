@@ -19,7 +19,7 @@ public class VerifyFailedReceiver {
 
     public void handle(String sellerId)
     {
-        /*//注册审核失败
-        managerService.sendRegisterEmail(sellerId,"注册失败了");
-*/    }
+
+        managerService.VerifyShopRegisterFailed(sellerId);
+    }
 }

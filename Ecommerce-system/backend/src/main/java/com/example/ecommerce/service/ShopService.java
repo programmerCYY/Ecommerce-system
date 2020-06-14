@@ -19,12 +19,14 @@ import java.util.List;
 public interface ShopService {
 
     @Transactional
-    CommonResult SellerRegister(String ShopId, String password, String Shopname,String Sellername,String address,String sellertelephone);
+    CommonResult SellerRegister(String password, String Shopname,String Sellername,String address,String sellertelephone);
 
     String SellerLogin(String Sellername,String Sellerpassword);
 
     @Transactional
-    CommonResult ApplyGoodsUp(String GoodId, String ShopId, String Goodname, String Goodpicture, String introduction, int number, int isPackage, String Frontpicture, String categoryId);
+    CommonResult ApplyGoodsUp(String ShopId,String Goodname, String Goodpicture, String introduction, int number, int isPackage, String Frontpicture, String categoryId);
 
-    void SendDelayMessage(String ShopId);
+    void SendDelayMessageOverTime(String ShopId);
+
+    CommonResult CancelRegister(String ShopId);
 }

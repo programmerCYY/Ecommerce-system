@@ -19,8 +19,7 @@ public class ShopUpReceiver {
 
     public void handle(String[] goodid_state)
     {
-        /*//发送审核成功或失败邮件
-        managerService.sendPutonEmail(goodid_state);*/
+       managerService.VerifyGoodSendEmail(goodid_state[0],goodid_state[1]);
     }
 
 }

@@ -1,6 +1,8 @@
 package com.example.ecommerce.component;
 
 import com.example.ecommerce.service.ManagerService;
+import com.example.ecommerce.service.ShopService;
+import com.example.ecommerce.service.UserrService;
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,13 +18,13 @@ import org.springframework.stereotype.Component;
 public class OverTimeCancelReceiver {
 
     @Autowired
-    private ManagerService managerService;
+    private ShopService shopService;
 
     @RabbitHandler
     public void handle(String username)
     {
-        /*//取消订单
-        managerService.sendRegisterEmail(username,"订单因超时取消");
-  */  }
+        shopService.CancelRegister(username);
+    }
+
 
 }

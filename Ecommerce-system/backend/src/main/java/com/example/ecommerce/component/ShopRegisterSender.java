@@ -19,9 +19,9 @@ public class ShopRegisterSender {
 
     @Autowired
     private AmqpTemplate amqpTemplate;
-    public void sendMessage(String sellerId,Long delayTimes)
+    public void sendMessage(String[] SellerId_RegisterState,Long delayTimes)
     {
-        amqpTemplate.convertAndSend(QueueEnum.QUEUE_REGISTER_TTL.getExchange(), QueueEnum.QUEUE_REGISTER_TTL.getRouteKey(), sellerId, new MessagePostProcessor() {
+        amqpTemplate.convertAndSend(QueueEnum.QUEUE_REGISTER_TTL.getExchange(), QueueEnum.QUEUE_REGISTER_TTL.getRouteKey(), SellerId_RegisterState, new MessagePostProcessor() {
             @Override
             public Message postProcessMessage(Message message) throws AmqpException {
                 message.getMessageProperties().setExpiration(String.valueOf(delayTimes));

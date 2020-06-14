@@ -98,7 +98,7 @@ public class ManagerServiceImpl implements ManagerService {
         userpermissionMapper.insert(userpermission);
         shopMapper.updateByPrimaryKey(shop);
 
-        VerifyRegisterSendEmail(Sellername,1);
+        VerifyRegisterSendEmail(Sellername,"1");
         return CommonResult.success(Sellername,"商家注册审核成功");
     }
 
@@ -106,17 +106,17 @@ public class ManagerServiceImpl implements ManagerService {
     public CommonResult VerifyShopRegisterFailed(String Sellername) {
         shopMapper.deleteByPrimaryKey(Sellername);
 
-        VerifyRegisterSendEmail(Sellername,0);
+        VerifyRegisterSendEmail(Sellername,"0");
         return CommonResult.success(Sellername,"该用户审核不通过");
     }
 
     @Override
-    public CommonResult VerifyRegisterSendEmail(String Sellername, int num) {
-        if(num==1)
+    public CommonResult VerifyRegisterSendEmail(String Sellername, String num) {
+        if(num.equals("1"))
         {
             return CommonResult.success(Sellername,"注册审核通过，邮件发送成功");
         }
-        if(num==0)
+        if(num.equals("0"))
         {
             return CommonResult.success(Sellername,"注册审核失败，已发邮件通知");
         }
@@ -136,7 +136,7 @@ public class ManagerServiceImpl implements ManagerService {
         goods.setCheckstate(1);
         goods.setUpdownstate(1);
         goodsMapper.updateByPrimaryKey(goods);
-        VerifyRegisterSendEmail(Goodid,1);
+        VerifyRegisterSendEmail(Goodid,"1");
 
         return CommonResult.success(Goodid,"商品上架成功");
     }
@@ -145,21 +145,27 @@ public class ManagerServiceImpl implements ManagerService {
     public CommonResult VerifyGoodFailed(String Goodid) {
         goodsMapper.deleteByPrimaryKey(Goodid);
 
-        VerifyGoodSendEmail(Goodid,0);
+        VerifyGoodSendEmail(Goodid,"0");
         return CommonResult.success(Goodid,"商品审核失败，拒绝上架");
     }
 
     @Override
-    public CommonResult VerifyGoodSendEmail(String Goodid, int num) {
-        if(num==1)
+    public CommonResult VerifyGoodSendEmail(String Goodid, String num) {
+        if(num.equals("1"))
         {
+
             return CommonResult.success(Goodid,"商品上架成功，邮件发送成功");
         }
-        if(num==0)
+        if(num.equals("0"))
         {
             return CommonResult.success(Goodid,"商品上架失败，已发邮件通知");
         }
         return null;
+    }
+
+    @Override
+    public CommonResult sendEmail(String emailAddress, String message) {
+        return CommonResult.success("账号："+emailAddress,"成功发送邮件");
     }
 
 }
