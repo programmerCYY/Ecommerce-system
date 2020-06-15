@@ -1,6 +1,7 @@
 package com.example.ecommerce.controller;
 
 import com.example.ecommerce.common.api.CommonResult;
+import com.example.ecommerce.dto.GoodsParam;
 import com.example.ecommerce.mbg.model.Shop;
 import com.example.ecommerce.service.ShopService;
 import io.swagger.annotations.Api;
@@ -34,14 +35,13 @@ public class ShopController {
     @ApiOperation("商家的注册")
     @RequestMapping(value = "/Sellerregister",method = RequestMethod.GET)
     @ResponseBody
-    public CommonResult register(@RequestParam String ShopId,
-                                 @RequestParam String password,
+    public CommonResult register(@RequestParam String password,
                                  @RequestParam String Shopname,
                                  @RequestParam String Sellername,
                                  @RequestParam String address,
                                  @RequestParam String sellertelephone)
     {
-        return shopService.SellerRegister(ShopId, password, Shopname,Sellername,address,sellertelephone);
+        return shopService.SellerRegister(password, Shopname,Sellername,address,sellertelephone);
     }
 
     @ApiOperation("商家登录")
@@ -63,19 +63,11 @@ public class ShopController {
     }
 
     @ApiOperation("商家申请上架商品")
-    @RequestMapping(value = "/ApplyGoodsOn",method = RequestMethod.GET)
+    @RequestMapping(value = "/ApplyGoodsOn",method = RequestMethod.POST)
     @ResponseBody
-    public CommonResult ApplyGoodsOn(@RequestParam String GoodId,
-                                     @RequestParam String ShopId,
-                                     @RequestParam String Goodname,
-                                     @RequestParam String Goodpicture,
-                                     @RequestParam String introduction,
-                                     @RequestParam int number,
-                                     @RequestParam int isPackage,
-                                     @RequestParam String Frontpicture,
-                                     @RequestParam String categoryId)
+    public CommonResult ApplyGoodsOn(@RequestBody GoodsParam goodsParam,BindingResult bindingResult)
     {
-        return shopService.ApplyGoodsUp(GoodId, ShopId, Goodname, Goodpicture, introduction, number, isPackage, Frontpicture, categoryId);
+        return shopService.ApplyGoodsUp(goodsParam);
     }
 
 }

@@ -2,11 +2,9 @@ package com.example.ecommerce.service.impl;
 
 import com.example.ecommerce.common.api.CommonResult;
 import com.example.ecommerce.common.utils.JwtTokenUtil;
+import com.example.ecommerce.dao.AddSkuDao;
 import com.example.ecommerce.dto.AdminUserDetails;
-import com.example.ecommerce.mbg.mapper.GoodsMapper;
-import com.example.ecommerce.mbg.mapper.ManagerMapper;
-import com.example.ecommerce.mbg.mapper.ShopMapper;
-import com.example.ecommerce.mbg.mapper.UserpermissionMapper;
+import com.example.ecommerce.mbg.mapper.*;
 import com.example.ecommerce.mbg.model.*;
 import com.example.ecommerce.service.ManagerService;
 import com.example.ecommerce.service.UserpermissionService;
@@ -57,6 +55,9 @@ public class ManagerServiceImpl implements ManagerService {
 
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
+
+    @Autowired(required = false)
+    private GoodSkuMapper goodSkuMapper;
 
 
     @Override
@@ -144,6 +145,9 @@ public class ManagerServiceImpl implements ManagerService {
     @Override
     public CommonResult VerifyGoodFailed(String Goodid) {
         goodsMapper.deleteByPrimaryKey(Goodid);
+        GoodSkuExample goodSkuExample = new GoodSkuExample();
+        goodSkuExample.createCriteria().andGoodidEqualTo(Goodid);
+        goodSkuMapper.deleteByExample(goodSkuExample);
 
         VerifyGoodSendEmail(Goodid,"0");
         return CommonResult.success(Goodid,"商品审核失败，拒绝上架");

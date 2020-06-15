@@ -5,6 +5,8 @@ import com.example.ecommerce.common.utils.JwtTokenUtil;
 import com.example.ecommerce.common.utils.TranslateToToken;
 import com.example.ecommerce.component.OverTimeCancelSender;
 import com.example.ecommerce.component.ShopRegisterSender;
+import com.example.ecommerce.dao.AddSkuDao;
+import com.example.ecommerce.dto.GoodsParam;
 import com.example.ecommerce.mbg.mapper.GoodsMapper;
 import com.example.ecommerce.mbg.mapper.ShopMapper;
 import com.example.ecommerce.mbg.mapper.UserpermissionMapper;
@@ -67,6 +69,9 @@ public class ShopServiceImpl implements ShopService {
     @Autowired
     private OverTimeCancelSender overTimeCancelSender;
 
+    @Autowired(required = false)
+    private AddSkuDao addSkuDao;
+
 
     @Override
     public CommonResult SellerRegister(String password, String Shopname,String Sellername,String address,String sellertelephone) {
@@ -94,6 +99,7 @@ public class ShopServiceImpl implements ShopService {
 
         shopMapper.insert(shop);
 
+
         shopService.SendDelayMessageOverTime(ShopId);
         return CommonResult.success(Sellername,"注册请求已提交，等待审核");
     }
@@ -115,8 +121,8 @@ public class ShopServiceImpl implements ShopService {
     }
 
     @Override
-    public CommonResult ApplyGoodsUp(String ShopId,String Goodname, String Goodpicture, String introduction, int number, int isPackage, String Frontpicture, String categoryId) {
-        if(ShopId.length()==0)
+    public CommonResult ApplyGoodsUp(GoodsParam goodsParam) {
+        if(goodsParam.getShopId().length()==0)
         {
             return CommonResult.failed("商家ID不能为空啊");
         }
@@ -127,21 +133,21 @@ public class ShopServiceImpl implements ShopService {
         good.setUpdownstate(0);
         good.setCheckstate(0);
         good.setAllsellnumber(0);
-        good.setCategoryid(categoryId);
+        good.setCategoryid(goodsParam.getCategoryId());
         good.setDeletestate(0);
-        good.setGoodpicture(Goodpicture);
-        good.setFrontpicture(Frontpicture);
-        good.setIntroduction(introduction);
-        good.setIspackage(isPackage);
-        good.setNumber(number);
+        good.setGoodpicture(goodsParam.getGoodpicture());
+        good.setFrontpicture(goodsParam.getFrontpicture());
+        good.setIntroduction(goodsParam.getIntroduction());
+        good.setIspackage(goodsParam.getIsPackage());
+        good.setNumber(goodsParam.getNumber());
         good.setShangtime(new Date());
-        good.setShopid(ShopId);
-        good.setGoodname(Goodname);
+        good.setShopid(goodsParam.getShopId());
+        good.setGoodname(goodsParam.getGoodname());
 
         goodsMapper.insert(good);
 
-
-        return CommonResult.success(Goodname,"商品上架申请已经提交，请等待12h审核");
+        addSkuDao.InsertList(goodsParam.getSkus());
+        return CommonResult.success(goodsParam.getGoodname(),"商品上架申请已经提交，请等待12h审核");
     }
 
     @Override

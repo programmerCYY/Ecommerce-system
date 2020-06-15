@@ -3,6 +3,8 @@ package com.example.ecommerce;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
 
 //这是正常Spring boot启动的main函数，记得把pom.xml的（删除嵌入式tomcat依赖）删除啊！！！气死我了
@@ -28,4 +30,5 @@ class Application extends SpringBootServletInitializer {
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
     }
-}*/
+}
+*/

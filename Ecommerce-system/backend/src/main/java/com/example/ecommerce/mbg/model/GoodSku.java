@@ -29,6 +29,9 @@ public class GoodSku implements Serializable {
     @ApiModelProperty(value = "图片")
     private String pictrue;
 
+    @ApiModelProperty(value = "属性")
+    private String attribute;
+
     private static final long serialVersionUID = 1L;
 
     public Integer getSkuid() {
@@ -95,6 +98,14 @@ public class GoodSku implements Serializable {
         this.pictrue = pictrue;
     }
 
+    public String getAttribute() {
+        return attribute;
+    }
+
+    public void setAttribute(String attribute) {
+        this.attribute = attribute;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -109,6 +120,7 @@ public class GoodSku implements Serializable {
         sb.append(", leftNumber=").append(leftNumber);
         sb.append(", soldNumber=").append(soldNumber);
         sb.append(", pictrue=").append(pictrue);
+        sb.append(", attribute=").append(attribute);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

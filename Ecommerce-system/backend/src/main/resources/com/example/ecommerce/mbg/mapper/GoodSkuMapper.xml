@@ -10,6 +10,7 @@
     <result column="Left_number" jdbcType="INTEGER" property="leftNumber" />
     <result column="Sold_number" jdbcType="INTEGER" property="soldNumber" />
     <result column="pictrue" jdbcType="VARCHAR" property="pictrue" />
+    <result column="Attribute" jdbcType="VARCHAR" property="attribute" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -70,7 +71,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    SKUID, goodID, number, price, Vipprice, Left_number, Sold_number, pictrue
+    SKUID, goodID, number, price, Vipprice, Left_number, Sold_number, pictrue, Attribute
   </sql>
   <select id="selectByExample" parameterType="com.example.ecommerce.mbg.model.GoodSkuExample" resultMap="BaseResultMap">
     select
@@ -105,10 +106,12 @@
   <insert id="insert" parameterType="com.example.ecommerce.mbg.model.GoodSku">
     insert into good_sku (SKUID, goodID, number, 
       price, Vipprice, Left_number, 
-      Sold_number, pictrue)
+      Sold_number, pictrue, Attribute
+      )
     values (#{skuid,jdbcType=INTEGER}, #{goodid,jdbcType=VARCHAR}, #{number,jdbcType=INTEGER}, 
       #{price,jdbcType=DECIMAL}, #{vipprice,jdbcType=DECIMAL}, #{leftNumber,jdbcType=INTEGER}, 
-      #{soldNumber,jdbcType=INTEGER}, #{pictrue,jdbcType=VARCHAR})
+      #{soldNumber,jdbcType=INTEGER}, #{pictrue,jdbcType=VARCHAR}, #{attribute,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.example.ecommerce.mbg.model.GoodSku">
     insert into good_sku
@@ -137,6 +140,9 @@
       <if test="pictrue != null">
         pictrue,
       </if>
+      <if test="attribute != null">
+        Attribute,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="skuid != null">
@@ -162,6 +168,9 @@
       </if>
       <if test="pictrue != null">
         #{pictrue,jdbcType=VARCHAR},
+      </if>
+      <if test="attribute != null">
+        #{attribute,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -198,6 +207,9 @@
       <if test="record.pictrue != null">
         pictrue = #{record.pictrue,jdbcType=VARCHAR},
       </if>
+      <if test="record.attribute != null">
+        Attribute = #{record.attribute,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -212,7 +224,8 @@
       Vipprice = #{record.vipprice,jdbcType=DECIMAL},
       Left_number = #{record.leftNumber,jdbcType=INTEGER},
       Sold_number = #{record.soldNumber,jdbcType=INTEGER},
-      pictrue = #{record.pictrue,jdbcType=VARCHAR}
+      pictrue = #{record.pictrue,jdbcType=VARCHAR},
+      Attribute = #{record.attribute,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -241,6 +254,9 @@
       <if test="pictrue != null">
         pictrue = #{pictrue,jdbcType=VARCHAR},
       </if>
+      <if test="attribute != null">
+        Attribute = #{attribute,jdbcType=VARCHAR},
+      </if>
     </set>
     where SKUID = #{skuid,jdbcType=INTEGER}
   </update>
@@ -252,7 +268,8 @@
       Vipprice = #{vipprice,jdbcType=DECIMAL},
       Left_number = #{leftNumber,jdbcType=INTEGER},
       Sold_number = #{soldNumber,jdbcType=INTEGER},
-      pictrue = #{pictrue,jdbcType=VARCHAR}
+      pictrue = #{pictrue,jdbcType=VARCHAR},
+      Attribute = #{attribute,jdbcType=VARCHAR}
     where SKUID = #{skuid,jdbcType=INTEGER}
   </update>
 </mapper>
