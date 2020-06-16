@@ -9,7 +9,7 @@
     <result column="Vipprice" jdbcType="DECIMAL" property="vipprice" />
     <result column="Left_number" jdbcType="INTEGER" property="leftNumber" />
     <result column="Sold_number" jdbcType="INTEGER" property="soldNumber" />
-    <result column="pictrue" jdbcType="VARCHAR" property="pictrue" />
+    <result column="picture" jdbcType="VARCHAR" property="picture" />
     <result column="Attribute" jdbcType="VARCHAR" property="attribute" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -71,7 +71,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    SKUID, goodID, number, price, Vipprice, Left_number, Sold_number, pictrue, Attribute
+    SKUID, goodID, number, price, Vipprice, Left_number, Sold_number, picture, Attribute
   </sql>
   <select id="selectByExample" parameterType="com.example.ecommerce.mbg.model.GoodSkuExample" resultMap="BaseResultMap">
     select
@@ -106,11 +106,11 @@
   <insert id="insert" parameterType="com.example.ecommerce.mbg.model.GoodSku">
     insert into good_sku (SKUID, goodID, number, 
       price, Vipprice, Left_number, 
-      Sold_number, pictrue, Attribute
+      Sold_number, picture, Attribute
       )
     values (#{skuid,jdbcType=INTEGER}, #{goodid,jdbcType=VARCHAR}, #{number,jdbcType=INTEGER}, 
       #{price,jdbcType=DECIMAL}, #{vipprice,jdbcType=DECIMAL}, #{leftNumber,jdbcType=INTEGER}, 
-      #{soldNumber,jdbcType=INTEGER}, #{pictrue,jdbcType=VARCHAR}, #{attribute,jdbcType=VARCHAR}
+      #{soldNumber,jdbcType=INTEGER}, #{picture,jdbcType=VARCHAR}, #{attribute,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.example.ecommerce.mbg.model.GoodSku">
@@ -137,8 +137,8 @@
       <if test="soldNumber != null">
         Sold_number,
       </if>
-      <if test="pictrue != null">
-        pictrue,
+      <if test="picture != null">
+        picture,
       </if>
       <if test="attribute != null">
         Attribute,
@@ -166,8 +166,8 @@
       <if test="soldNumber != null">
         #{soldNumber,jdbcType=INTEGER},
       </if>
-      <if test="pictrue != null">
-        #{pictrue,jdbcType=VARCHAR},
+      <if test="picture != null">
+        #{picture,jdbcType=VARCHAR},
       </if>
       <if test="attribute != null">
         #{attribute,jdbcType=VARCHAR},
@@ -204,8 +204,8 @@
       <if test="record.soldNumber != null">
         Sold_number = #{record.soldNumber,jdbcType=INTEGER},
       </if>
-      <if test="record.pictrue != null">
-        pictrue = #{record.pictrue,jdbcType=VARCHAR},
+      <if test="record.picture != null">
+        picture = #{record.picture,jdbcType=VARCHAR},
       </if>
       <if test="record.attribute != null">
         Attribute = #{record.attribute,jdbcType=VARCHAR},
@@ -224,7 +224,7 @@
       Vipprice = #{record.vipprice,jdbcType=DECIMAL},
       Left_number = #{record.leftNumber,jdbcType=INTEGER},
       Sold_number = #{record.soldNumber,jdbcType=INTEGER},
-      pictrue = #{record.pictrue,jdbcType=VARCHAR},
+      picture = #{record.picture,jdbcType=VARCHAR},
       Attribute = #{record.attribute,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -251,8 +251,8 @@
       <if test="soldNumber != null">
         Sold_number = #{soldNumber,jdbcType=INTEGER},
       </if>
-      <if test="pictrue != null">
-        pictrue = #{pictrue,jdbcType=VARCHAR},
+      <if test="picture != null">
+        picture = #{picture,jdbcType=VARCHAR},
       </if>
       <if test="attribute != null">
         Attribute = #{attribute,jdbcType=VARCHAR},
@@ -268,7 +268,7 @@
       Vipprice = #{vipprice,jdbcType=DECIMAL},
       Left_number = #{leftNumber,jdbcType=INTEGER},
       Sold_number = #{soldNumber,jdbcType=INTEGER},
-      pictrue = #{pictrue,jdbcType=VARCHAR},
+      picture = #{picture,jdbcType=VARCHAR},
       Attribute = #{attribute,jdbcType=VARCHAR}
     where SKUID = #{skuid,jdbcType=INTEGER}
   </update>
